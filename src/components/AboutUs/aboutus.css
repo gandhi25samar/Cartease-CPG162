@@ -1,0 +1,33 @@
+.content {
+  height: 634px;
+  width: 1262px;
+}
+
+.content .overlap-group {
+  height: 607px;
+  position: relative;
+  top: 6px;
+}
+
+.content .welcome-to-cartease {
+  color: #000000;
+  font-family: "Inter-Regular", Helvetica;
+  font-size: 18px;
+  font-weight: 400;
+  height: 607px;
+  left: 0;
+  letter-spacing: -0.2px;
+  line-height: 36px;
+  position: absolute;
+  top: 0;
+  width: 1262px;
+}
+
+.content .image {
+  height: 320px;
+  left: 960px;
+  object-fit: cover;
+  position: absolute;
+  top: 1px;
+  width: 289px;
+}

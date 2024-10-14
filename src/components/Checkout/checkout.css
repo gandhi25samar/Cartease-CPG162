@@ -1,0 +1,105 @@
+.details {
+  height: 99px;
+  position: relative;
+  width: 1280px;
+}
+
+.details .text-wrapper {
+  color: #000000;
+  font-family: "Inter-Bold", Helvetica;
+  font-size: 24px;
+  font-weight: 700;
+  height: 20px;
+  left: 0;
+  letter-spacing: -0.26px;
+  line-height: 48px;
+  position: absolute;
+  text-align: center;
+  white-space: nowrap;
+  width: 369px;
+}
+
+.details .mobile {
+  height: 33px;
+  left: 24px;
+  position: absolute;
+  top: 47px;
+  width: 464px;
+}
+
+.details .overlap-group {
+  height: 33px;
+  left: 4px;
+  position: relative;
+  top: -1px;
+  width: 460px;
+}
+
+.details .div {
+  color: #000000;
+  font-family: "Inter-Bold", Helvetica;
+  font-size: 24px;
+  font-weight: 700;
+  height: 33px;
+  left: 0;
+  letter-spacing: -0.26px;
+  line-height: 48px;
+  position: absolute;
+  text-align: center;
+  top: 0;
+  white-space: nowrap;
+  width: 149px;
+}
+
+.details .rectangle {
+  background-color: #d9d9d9;
+  height: 23px;
+  left: 143px;
+  position: absolute;
+  top: 3px;
+  width: 317px;
+}
+
+.details .email {
+  height: 33px;
+  left: 527px;
+  position: absolute;
+  top: 47px;
+  width: 464px;
+}
+
+.details .overlap {
+  height: 33px;
+  left: 56px;
+  position: relative;
+  top: -1px;
+  width: 408px;
+}
+
+.details .input {
+  background: transparent;
+  border: none;
+  color: #000000;
+  font-family: "Inter-Bold", Helvetica;
+  font-size: 24px;
+  font-weight: 700;
+  height: 33px;
+  left: 0;
+  letter-spacing: -0.26px;
+  line-height: 48px;
+  padding: 0;
+  position: absolute;
+  text-align: center;
+  top: 0;
+  white-space: nowrap;
+  width: 97px;
+}
+
+.details .rectangle-2 {
+  background-color: #d9d9d9;
+  height: 23px;
+  left: 91px;
+  position: absolute;
+  top: 3px;
+  width: 317px;
+}

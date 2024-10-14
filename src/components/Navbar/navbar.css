@@ -1,0 +1,99 @@
+.logo-and-navbar {
+  height: 166px;
+  position: relative;
+  width: 1280px;
+}
+
+.logo-and-navbar .logo {
+  height: 108px;
+  left: 0;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  width: 336px;
+}
+
+.logo-and-navbar .navbar {
+  background: linear-gradient(
+    180deg,
+    rgb(124, 228, 249) 0%,
+    rgb(158, 152, 255) 100%
+  );
+  height: 58px;
+  left: 0;
+  position: absolute;
+  top: 108px;
+  width: 1280px;
+}
+
+.logo-and-navbar .text-wrapper {
+  color: #000000;
+  font-family: "Inter-Light", Helvetica;
+  font-size: 20px;
+  font-weight: 300;
+  height: 40px;
+  left: 285px;
+  letter-spacing: -0.22px;
+  line-height: 40px;
+  position: absolute;
+  top: 8px;
+  width: 87px;
+}
+
+.logo-and-navbar .div {
+  color: #000000;
+  font-family: "Inter-Light", Helvetica;
+  font-size: 20px;
+  font-weight: 300;
+  height: 40px;
+  left: 796px;
+  letter-spacing: -0.22px;
+  line-height: 40px;
+  position: absolute;
+  top: 8px;
+  width: 130px;
+}
+
+.logo-and-navbar .text-wrapper-2 {
+  color: #000000;
+  font-family: "Inter-Light", Helvetica;
+  font-size: 20px;
+  font-weight: 300;
+  height: 40px;
+  left: 539px;
+  letter-spacing: -0.22px;
+  line-height: 40px;
+  position: absolute;
+  top: 8px;
+  width: 90px;
+}
+
+.logo-and-navbar .text-wrapper-3 {
+  color: #000000;
+  font-family: "Inter-Light", Helvetica;
+  font-size: 20px;
+  font-weight: 300;
+  height: 40px;
+  left: 28px;
+  letter-spacing: -0.22px;
+  line-height: 40px;
+  position: absolute;
+  text-align: center;
+  top: 8px;
+  width: 90px;
+}
+
+.logo-and-navbar .text-wrapper-4 {
+  color: #000000;
+  font-family: "Inter-Light", Helvetica;
+  font-size: 20px;
+  font-weight: 300;
+  height: 40px;
+  left: 1093px;
+  letter-spacing: -0.22px;
+  line-height: 40px;
+  position: absolute;
+  top: 8px;
+  white-space: nowrap;
+  width: 93px;
+}

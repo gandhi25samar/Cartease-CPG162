@@ -1,0 +1,101 @@
+.promo-codes .promo-code {
+  background-color: #7ce4f959;
+  border: 1px solid;
+  border-color: #000000;
+  height: 163px;
+  left: 12px;
+  position: absolute;
+  top: 176px;
+  width: 1257px;
+}
+
+.promo-codes .code {
+  color: #000000;
+  font-family: "Inter-Regular", Helvetica;
+  font-size: 24px;
+  font-weight: 400;
+  height: 43px;
+  left: 12px;
+  letter-spacing: -0.26px;
+  line-height: 48px;
+  position: absolute;
+  top: 10px;
+  white-space: nowrap;
+  width: 172px;
+}
+
+.promo-codes .span {
+  letter-spacing: -0.06px;
+}
+
+.promo-codes .text-wrapper-6 {
+  font-family: "Inter-Bold", Helvetica;
+  font-weight: 700;
+  letter-spacing: -0.06px;
+}
+
+.promo-codes .minimum-cart-value {
+  color: #000000;
+  font-family: "Inter-Regular", Helvetica;
+  font-size: 24px;
+  font-weight: 400;
+  height: 86px;
+  left: 12px;
+  letter-spacing: -0.26px;
+  line-height: 48px;
+  position: absolute;
+  top: 53px;
+  width: 993px;
+}
+
+.promo-codes .promo-code-2 {
+  background-color: #7ce4f959;
+  border: 1px solid;
+  border-color: #000000;
+  height: 163px;
+  left: 11px;
+  position: absolute;
+  top: 349px;
+  width: 1257px;
+}
+
+.promo-codes .code-flat {
+  color: #000000;
+  font-family: "Inter-Regular", Helvetica;
+  font-size: 24px;
+  font-weight: 400;
+  height: 43px;
+  left: 12px;
+  letter-spacing: -0.26px;
+  line-height: 48px;
+  position: absolute;
+  top: 10px;
+  white-space: nowrap;
+  width: 194px;
+}
+
+.promo-codes .promo-code-3 {
+  background-color: #7ce4f959;
+  border: 1px solid;
+  border-color: #000000;
+  height: 163px;
+  left: 12px;
+  position: absolute;
+  top: 522px;
+  width: 1257px;
+}
+
+.promo-codes .code-PAYDAYDEAL {
+  color: #000000;
+  font-family: "Inter-Regular", Helvetica;
+  font-size: 24px;
+  font-weight: 400;
+  height: 43px;
+  left: 12px;
+  letter-spacing: -0.26px;
+  line-height: 48px;
+  position: absolute;
+  top: 10px;
+  white-space: nowrap;
+  width: 237px;
+}

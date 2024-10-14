@@ -1,0 +1,60 @@
+.image {
+  margin-top: 35%;
+  margin-left: 50%;
+}
+.start {
+  background-color: #f5f5f5;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+}
+
+.start .div {
+  background-color: #f5f5f5;
+  height: 832px;
+  overflow: hidden;
+  position: relative;
+  width: 1280px;
+}
+
+.start .image {
+  height: 444px;
+  left: -316px;
+  position: absolute;
+  top: -381px;
+  width: 616px;
+}
+
+.start .button {
+  all: unset;
+  background: linear-gradient(
+    180deg,
+    rgb(124, 228, 249) 0%,
+    rgb(158, 152, 255) 100%
+  );
+  border-radius: 20px;
+  box-sizing: border-box;
+  height: 88px;
+  left: 466px;
+  overflow: hidden;
+  position: absolute;
+  top: 477px;
+  width: 332px;
+}
+
+.start .text-wrapper {
+  color: #331144cc;
+  font-family: "Inter-Regular", Helvetica;
+  font-size: 35px;
+  font-weight: 400;
+  height: 84px;
+  left: 4px;
+  letter-spacing: -0.39px;
+  line-height: 70px;
+  position: absolute;
+  text-align: center;
+  top: 1px;
+  white-space: nowrap;
+  width: 328px;
+}
