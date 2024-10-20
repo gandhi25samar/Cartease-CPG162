@@ -1,4 +1,4 @@
-.contentP {
+/* .contentP {
   height: 609px;
   position: relative;
   width: 1280px;
@@ -344,4 +344,41 @@
   text-align: left;
   font-size: 24px;
   width: 100%;
+} */
+
+.contentP {
+  height: auto;
+  width: 100%;
+}
+
+.div2 {
+  text-align: left;
+  font-size: 24px;
+  margin-bottom: 20px;
+  width: 100%;
+  padding: 10px;
+}
+
+.product-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.product-table th,
+.product-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center;
+}
+
+.product-image {
+  width: 100px;
+  height: auto;
+}
+
+.product-table th {
+  background-color: #f2f2f2;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  font-size: 18px;
 }
