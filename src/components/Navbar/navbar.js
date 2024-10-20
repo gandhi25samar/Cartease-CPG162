@@ -11,6 +11,13 @@ const LogoAndNavbar = () => {
       </a>
       <div className="navbar">
         <Link
+          to="/Home"
+          className="text-wrapper-3"
+          style={{ textDecoration: "none" }}
+        >
+          Home
+        </Link>
+        <Link
           to="/AboutUs"
           className="text-wrapper"
           style={{ textDecoration: "none" }}
@@ -31,13 +38,7 @@ const LogoAndNavbar = () => {
         >
           Products
         </Link>
-        <Link
-          to="/Home"
-          className="text-wrapper-3"
-          style={{ textDecoration: "none" }}
-        >
-          Home
-        </Link>
+
         <Link
           to="/Checkout"
           className="text-wrapper-4"
