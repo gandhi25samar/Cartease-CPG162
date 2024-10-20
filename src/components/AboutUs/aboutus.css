@@ -24,10 +24,11 @@
 }
 
 .content .image {
-  height: 320px;
-  left: 960px;
+  height: 300px;
+  left: 950px;
   object-fit: cover;
   position: absolute;
   top: 1px;
   width: 289px;
+  border-radius: 10%;
 }

@@ -1,6 +1,6 @@
 import React from "react";
 import "./aboutus.css";
-import image from "../../assets/Lays.jpg";
+import image from "../../assets/cart.jpg";
 
 const AboutUs = () => {
   return (
@@ -37,7 +37,7 @@ const AboutUs = () => {
           to reshape the future of retail and make shopping simpler, smarter,
           and more enjoyable for everyone.
         </p>
-        <img className="image" alt="Image" src={image} />
+        <img className="image" alt="Shopping Cart" src={image} />
       </div>
     </div>
   );
