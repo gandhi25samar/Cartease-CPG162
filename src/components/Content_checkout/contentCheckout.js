@@ -58,42 +58,88 @@ import cartItems from "../Content/cart_items";
 import coupons from "../PromoCodes/coupons";
 import "./contentCheckout.css";
 
+// const ContentCheckout = () => {
+//   const [promoCode, setPromoCode] = useState("");
+//   const [discount, setDiscount] = useState(0);
+//   const [message, setMessage] = useState("");
+
+//   // Calculate total cart value before discount
+//   const totalCartValue = cartItems.reduce(
+//     (total, item) => total + item.price * item.qty,
+//     0
+//   );
+
+//   // Calculate total cart value after applying discount
+//   const discountedValue = totalCartValue - discount;
+
+//   const applyPromoCode = () => {
+//     const coupon = coupons.find((c) => c.code === promoCode);
+
+//     if (!coupon) {
+//       setMessage("Invalid Promo Code");
+//       setDiscount(0);
+//     } else if (totalCartValue < coupon.minValue) {
+//       setMessage("Minimum cart value not met");
+//       setDiscount(0);
+//     } else {
+//       if (coupon.code === "GET10") {
+//         const discountAmount = Math.min(totalCartValue * 0.1, 150);
+//         setDiscount(discountAmount);
+//         setMessage("Promo Code Applied");
+//       } else if (coupon.code === "FLAT200") {
+//         setDiscount(200);
+//         setMessage("Promo Code Applied");
+//       } else if (coupon.code === "PAYDAYDEAL") {
+//         const discountAmount = Math.min(totalCartValue * 0.2, 500);
+//         setDiscount(discountAmount);
+//         setMessage("Promo Code Applied");
+//       }
+//     }
+//   };
+
 const ContentCheckout = () => {
   const [promoCode, setPromoCode] = useState("");
-  const [discount, setDiscount] = useState(0);
-  const [message, setMessage] = useState("");
+  const [promoMessage, setPromoMessage] = useState("");
+  const [discountedTotal, setDiscountedTotal] = useState(null);
 
-  // Calculate total cart value before discount
+  // Calculate the total cart value
   const totalCartValue = cartItems.reduce(
     (total, item) => total + item.price * item.qty,
     0
   );
+  const newTotal = totalCartValue - discountedTotal;
 
-  // Calculate total cart value after applying discount
-  const discountedValue = totalCartValue - discount;
-
+  // Handle promo code application
   const applyPromoCode = () => {
-    const coupon = coupons.find((c) => c.code === promoCode);
+    // Find the promo code from the coupons.js file
+    const promo = coupons.find(
+      (coupon) => coupon.code === promoCode.toUpperCase()
+    );
 
-    if (!coupon) {
-      setMessage("Invalid Promo Code");
-      setDiscount(0);
-    } else if (totalCartValue < coupon.minValue) {
-      setMessage("Minimum cart value not met");
-      setDiscount(0);
+    if (!promo) {
+      // If the promo code does not exist
+      setPromoMessage("Invalid Promo Code");
+      setDiscountedTotal(null);
+      return;
+    }
+
+    if (totalCartValue < promo.minValue) {
+      // If the minimum value requirement is not met
+      setPromoMessage(
+        `Minimum cart value of ₹${promo.minValue} is required to apply this code`
+      );
+      setDiscountedTotal(null);
     } else {
-      if (coupon.code === "GET10") {
-        const discountAmount = Math.min(totalCartValue * 0.1, 150);
-        setDiscount(discountAmount);
-        setMessage("Promo Code Applied");
-      } else if (coupon.code === "FLAT200") {
-        setDiscount(200);
-        setMessage("Promo Code Applied");
-      } else if (coupon.code === "PAYDAYDEAL") {
-        const discountAmount = Math.min(totalCartValue * 0.2, 500);
-        setDiscount(discountAmount);
-        setMessage("Promo Code Applied");
+      // Calculate the discount based on the promo details
+      let discount = promo.discount * totalCartValue;
+      if (promo.discount <= 1) {
+        // For percentage-based discounts, apply a max cap
+        discount = Math.min(discount, promo.maxDiscount);
       }
+
+      // Display success message and update the discounted total
+      setPromoMessage(`Promo Code Applied: ${promo.description}`);
+      setDiscountedTotal(discount);
     }
   };
 
@@ -144,16 +190,14 @@ const ContentCheckout = () => {
         </button>
         <div
           className={`promo-message ${
-            message.includes("Invalid") || message.includes("Minimum")
+            promoMessage.includes("Invalid") || promoMessage.includes("Minimum")
               ? "error"
               : "success"
           }`}
         >
-          {message}
+          {promoMessage}
         </div>
-        <div className="text-wrapper-14">
-          Total Cart Value: ₹{discountedValue}
-        </div>
+        <div className="text-wrapper-14">Total Cart Value: ₹{newTotal}</div>
         <button className="button">
           <div className="text-wrapper-15">PROCEED TO PAYMENT</div>
         </button>

@@ -17,7 +17,7 @@ const cartItems = [
   {
     id: 3,
     productName: "Tide Matic Top Load Detergent",
-    qty: 2,
+    qty: 10,
     price: 200,
     image: "tide.jpg",
   },
