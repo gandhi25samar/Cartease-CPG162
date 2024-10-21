@@ -1,4 +1,4 @@
-.details {
+/* .details {
   height: 99px;
   position: relative;
   width: 1280px;
@@ -102,4 +102,98 @@
   position: absolute;
   top: 3px;
   width: 317px;
+}
+
+.send-btn {
+  margin-left: 10px;
+  background-color: #4caf50;
+  color: black;
+  border: none;
+  padding: 5px 10px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.send-btn:hover {
+  background-color: #45a049;
+}
+
+.div {
+  width: 250px;
+} */
+
+.details {
+  width: 100%; /* Ensure that the container takes up full width */
+  padding: 10px;
+}
+
+.text-wrapper {
+  color: #000;
+  font-family: "Inter-Bold", Helvetica;
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 20px; /* Add some space between the heading and input fields */
+}
+
+.mobile {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 10px; /* Adds space between the input and the button */
+}
+
+.input-group {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Space between input and button */
+}
+
+.mobile-input {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 250px;
+}
+
+.send-btn {
+  padding: 10px 20px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.send-btn:hover {
+  background-color: #45a049;
+}
+
+.error-message {
+  color: red;
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+.success-message {
+  color: green;
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+.email {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 10px; /* Adds space between the input and the button */
+}
+
+.email-input {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 250px;
 }
