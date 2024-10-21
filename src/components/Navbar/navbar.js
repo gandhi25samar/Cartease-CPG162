@@ -19,7 +19,7 @@ const LogoAndNavbar = () => {
         </Link>
         <Link
           to="/AboutUs"
-          className="text-wrapper"
+          className="text-wrapper-1"
           style={{ textDecoration: "none" }}
         >
           About Us
