@@ -161,7 +161,7 @@ const Content = () => {
     //   </div>
     // </div>
     <div className="content">
-      <div className="cart-table-wrapper">
+      <div className="cart-table-wrapper-home">
         <table className="cart-table">
           <thead>
             <tr>
