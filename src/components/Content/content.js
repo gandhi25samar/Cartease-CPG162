@@ -72,35 +72,125 @@ const Content = () => {
   );
 
   return (
+    // <div className="content">
+    //   <table className="cart-table">
+    //     <thead>
+    //       <tr>
+    //         <th>S.No.</th>
+    //         <th>Product</th>
+    //         <th>Name</th>
+    //         <th>Qty</th>
+    //         <th>Price</th>
+    //       </tr>
+    //     </thead>
+    //     <tbody>
+    //       {cartItems.map((item, index) => (
+    //         <tr key={item.id}>
+    //           <td>{index + 1}</td>
+    //           <td>
+    //             <img
+    //               src={require(`../../assets/${item.image}`)}
+    //               alt={item.productName}
+    //               className="product-image"
+    //             />
+    //           </td>
+    //           <td>{item.productName}</td>
+    //           <td>{item.qty}</td>
+    //           <td>₹{item.price}</td>
+    //         </tr>
+    //       ))}
+    //     </tbody>
+    //   </table>
+
+    //   <div className="total-checkout">
+    //     <div className="total-cart-value">Total Cart Value: ₹{totalPrice}</div>
+    //     <button className="button">
+    //       <a
+    //         href="/Checkout"
+    //         className="checkout-link"
+    //         style={{ textDecoration: "none" }}
+    //       >
+    //         PROCEED TO CHECKOUT
+    //       </a>
+    //     </button>
+    //   </div>
+    // </div>
+    // <div className="content">
+    //   <div className="cart-table-wrapper">
+    //     <table className="cart-table">
+    //       <thead>
+    //         <tr>
+    //           <th>S.No.</th>
+    //           <th>Product</th>
+    //           <th>Name</th>
+    //           <th>Qty</th>
+    //           <th>Price</th>
+    //         </tr>
+    //       </thead>
+    //       <tbody>
+    //         {cartItems.map((item, index) => (
+    //           <tr key={item.id}>
+    //             <td>{index + 1}</td>
+    //             <td>
+    //               <img
+    //                 src={require(`../../assets/${item.image}`)}
+    //                 alt={item.productName}
+    //                 className="product-image"
+    //               />
+    //             </td>
+    //             <td>{item.productName}</td>
+    //             <td>{item.qty}</td>
+    //             <td>₹{item.price}</td>
+    //           </tr>
+    //         ))}
+    //       </tbody>
+    //     </table>
+    //   </div>
+
+    //   <div className="total-checkout">
+    //     <div className="total-cart-value">Total Cart Value: ₹{totalPrice}</div>
+    //     <button className="button">
+    //       <a
+    //         href="/Checkout"
+    //         className="checkout-link"
+    //         style={{ textDecoration: "none" }}
+    //       >
+    //         PROCEED TO CHECKOUT
+    //       </a>
+    //     </button>
+    //   </div>
+    // </div>
     <div className="content">
-      <table className="cart-table">
-        <thead>
-          <tr>
-            <th>S.No.</th>
-            <th>Product</th>
-            <th>Name</th>
-            <th>Qty</th>
-            <th>Price</th>
-          </tr>
-        </thead>
-        <tbody>
-          {cartItems.map((item, index) => (
-            <tr key={item.id}>
-              <td>{index + 1}</td>
-              <td>
-                <img
-                  src={require(`../../assets/${item.image}`)}
-                  alt={item.productName}
-                  className="product-image"
-                />
-              </td>
-              <td>{item.productName}</td>
-              <td>{item.qty}</td>
-              <td>₹{item.price}</td>
+      <div className="cart-table-wrapper">
+        <table className="cart-table">
+          <thead>
+            <tr>
+              <th>S.No.</th>
+              <th>Product</th>
+              <th>Name</th>
+              <th>Qty</th>
+              <th>Price</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {cartItems.map((item, index) => (
+              <tr key={item.id}>
+                <td>{index + 1}</td>
+                <td>
+                  <img
+                    src={require(`../../assets/${item.image}`)}
+                    alt={item.productName}
+                    className="product-image"
+                  />
+                </td>
+                <td>{item.productName}</td>
+                <td>{item.qty}</td>
+                <td>₹{item.price}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
 
       <div className="total-checkout">
         <div className="total-cart-value">Total Cart Value: ₹{totalPrice}</div>

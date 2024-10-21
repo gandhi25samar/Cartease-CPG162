@@ -25,18 +25,18 @@ const LogoAndNavbar = () => {
           About Us
         </Link>
         <Link
-          to="/PromoCodes"
-          className="div"
-          style={{ textDecoration: "none" }}
-        >
-          Promo Codes
-        </Link>
-        <Link
           to="/Products"
           className="text-wrapper-2"
           style={{ textDecoration: "none" }}
         >
           Products
+        </Link>
+        <Link
+          to="/PromoCodes"
+          className="div"
+          style={{ textDecoration: "none" }}
+        >
+          Promo Codes
         </Link>
 
         <Link

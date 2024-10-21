@@ -24,6 +24,18 @@ const inventory = [
     price: "₹200",
     image: require("../../assets/tide.jpg"),
   },
+  {
+    id: 5,
+    name: "Nabati Cheese Wafers",
+    price: "₹20",
+    image: require("../../assets/nabati.jpg"),
+  },
+  {
+    id: 6,
+    name: "Lays Indian Magic Masala",
+    price: "₹20",
+    image: require("../../assets/Lays.jpg"),
+  },
 ];
 
 export default inventory;
