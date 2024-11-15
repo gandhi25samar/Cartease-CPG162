@@ -1,0 +1,35 @@
+/* Styles for the webcam container */
+.webcam-container {
+  position: fixed;
+  top: 100px;
+  right: 20px;
+  width: 300px;
+  background-color: #fff;
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+}
+
+/* Webcam feed styling */
+.webcam {
+  width: 100%;
+  border-radius: 8px;
+}
+
+/* Capture button styling */
+.capture-button {
+  margin-top: 10px;
+  width: 100%;
+  padding: 8px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.capture-button:hover {
+  background-color: #0056b3;
+}

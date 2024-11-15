@@ -116,6 +116,18 @@
   width: auto;
   max-width: 336px;
 }
+/* Position the camera button on the right side */
+.camera-button {
+  background-color: transparent;
+  border: none;
+  font-size: 40px;
+  cursor: pointer;
+  color: #000;
+  position: absolute;
+  top: 0;
+  right: 20px; /* Adjusts the button 20px from the right edge */
+  transform: translateY(50%); /* Centers vertically within the container */
+}
 
 /* Navbar background that spans the full width */
 .logo-and-navbar .navbar {
@@ -182,5 +194,10 @@
 
   .logo {
     margin-bottom: 10px; /* Add spacing between logo and navbar */
+  }
+  .camera-button {
+    margin-top: 10px; /* Add spacing for smaller screens */
+    position: static;
+    transform: none;
   }
 }
