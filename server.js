@@ -57,7 +57,7 @@ const app = express();
 // Configure CORS to allow necessary methods, headers, and origin
 app.use(
   cors({
-    origin: "https://cartease-cpg162.netlify.app/", // Allow only this origin
+    origin: "http://localhost:3000", // Allow only this origin
     methods: ["GET", "POST", "OPTIONS"], // Allow these methods
     allowedHeaders: ["Content-Type"], // Allow necessary headers
   })
