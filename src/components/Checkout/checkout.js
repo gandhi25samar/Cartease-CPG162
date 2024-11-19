@@ -140,17 +140,20 @@ const Checkout = () => {
 `;
 
     try {
-      const response = await fetch("http://localhost:3001/send-email", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email: email,
-          message: message,
-          isHtml: true,
-        }),
-      });
+      const response = await fetch(
+        "https://fixed-autumn-baseball.glitch.me/send-email",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email: email,
+            message: message,
+            isHtml: true,
+          }),
+        }
+      );
 
       if (response.ok) {
         //const result = await response.text();
