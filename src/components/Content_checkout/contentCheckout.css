@@ -422,6 +422,14 @@
   width: 50px;
   height: auto;
 }
+.div3 {
+  text-align: left;
+  font-size: 24px;
+  margin-bottom: 20px;
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+}
 
 .total-checkout {
   display: flex;
@@ -496,11 +504,13 @@
     align-items: stretch; /* Align elements to fill the width */
   }
 
-  .div2 {
+  .div3 {
     width: 100%; /* Full width for the promo code input */
     height: 10%;
     font-size: 14px;
     padding: 8px;
+    top: 10px;
+    margin-top: 0px;
   }
 
   .apply-button {

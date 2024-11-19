@@ -179,7 +179,7 @@ const ContentCheckout = () => {
       </div>
       <div className="total-checkout">
         <input
-          className="div2"
+          className="div3"
           placeholder="Apply Promo Code"
           type="text"
           value={promoCode}
