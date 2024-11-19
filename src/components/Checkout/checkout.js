@@ -108,7 +108,7 @@ const Checkout = () => {
     setSuccessMessage("");
 
     setLoading(true); // Set loading state to true
-    const total = calculateTotal();
+    //const total = calculateTotal();
     const message = `
 <h2>Your cart details:</h2>
 <table border="1" cellpadding="10" cellspacing="0">
@@ -153,7 +153,7 @@ const Checkout = () => {
       });
 
       if (response.ok) {
-        const result = await response.text();
+        //const result = await response.text();
         setSuccessMessage(`Bill sent to ${email}`);
       } else {
         setError("Failed to send email. Please enter a valid email id.");

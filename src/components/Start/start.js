@@ -7,7 +7,7 @@ const Start = () => {
   return (
     <div className="start">
       <div className="div">
-        <img className="image" alt="Image" src={Logo} />
+        <img className="image" alt="Image_Logo" src={Logo} />
         <button className="button">
           <Link
             to="/Home"
