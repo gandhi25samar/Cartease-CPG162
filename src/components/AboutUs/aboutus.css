@@ -1,18 +1,17 @@
-.content {
+.content-about {
   height: 634px;
-  width: 1262px;
 }
 
-.content .overlap-group {
+.content-about .overlap-group {
   height: 607px;
   position: relative;
   top: 6px;
 }
 
-.content .welcome-to-cartease {
+.content-about .welcome-to-cartease {
   color: #000000;
   font-family: "Inter-Regular", Helvetica;
-  font-size: 18px;
+  font-size: 22px;
   font-weight: 400;
   height: 607px;
   left: 0;
@@ -20,15 +19,45 @@
   line-height: 36px;
   position: absolute;
   top: 0;
-  width: 1262px;
 }
 
-.content .image {
+.content-about .image {
   height: 300px;
-  left: 950px;
+  right: 30px;
   object-fit: cover;
   position: absolute;
   top: 1px;
   width: 289px;
   border-radius: 10%;
+}
+
+/* Media Query for Raspberry Pi Screen (800x480) */
+@media (max-width: 800px) {
+  .content-about {
+    height: auto;
+    width: 95%;
+    padding: 20px;
+  }
+
+  .content-about .overlap-group {
+    height: auto;
+    position: relative; /* Keep relative positioning */
+    top: 0;
+  }
+
+  .content-about .welcome-to-cartease {
+    font-size: 11.5px; /* Reduce font size */
+    line-height: 24px; /* Adjust line height */
+    width: 100%; /* Make text take full width */
+    height: auto; /* Allow height to adjust dynamically */
+    position: static; /* Reset positioning */
+  }
+
+  .content-about .image {
+    height: 150px; /* Reduce image size */
+    width: 150px; /* Adjust proportionally */
+    position: absolute; /* Keep absolute positioning */
+    left: calc(100% - 160px); /* Align to the right */
+    top: 10px; /* Add spacing from the top */
+  }
 }

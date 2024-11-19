@@ -180,24 +180,32 @@
   text-align: center;
 }
 
-/* Optional media queries for better responsiveness on smaller screens */
-@media (max-width: 768px) {
+@media screen and (max-width: 800px) and (max-height: 480px) {
+  /* Navbar container */
   .logo-and-navbar {
-    flex-direction: column; /* Stack logo and navbar vertically */
-    height: auto; /* Adjust height automatically */
+    font-size: 14px; /* Adjust overall font size for smaller screens */
+    height: 60px;
   }
 
-  .navbar {
-    flex-direction: column;
-    height: auto;
+  /* Navbar logo */
+  .logo-and-navbar .logo {
+    max-width: 150px; /* Scale down logo size */
+    height: auto; /* Maintain aspect ratio */
   }
 
-  .logo {
-    margin-bottom: 10px; /* Add spacing between logo and navbar */
+  /* Navbar links */
+  .logo-and-navbar .navbar {
+    top: 90%;
+    height: 50%;
+  }
+
+  .navbar a {
+    font-size: 12px; /* Smaller text size for links */
+    padding: 0px 0px; /* Reduce padding for links */
   }
   .camera-button {
-    margin-top: 10px; /* Add spacing for smaller screens */
-    position: static;
-    transform: none;
+    font-size: 25px; /* Further reduce button size */
+    top: 5px; /* Adjust position */
+    right: 10px;
   }
 }

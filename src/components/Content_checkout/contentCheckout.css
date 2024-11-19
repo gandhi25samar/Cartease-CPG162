@@ -403,7 +403,6 @@
 .cart-table-wrapper {
   max-height: 420px; /* Adjust as needed */
   overflow-y: auto; /* Enable scrolling if the table exceeds this height */
-  margin-top: 20px;
 }
 
 .cart-table th,
@@ -465,4 +464,67 @@
   color: #331144cc;
   cursor: pointer;
   margin-left: auto;
+}
+
+@media screen and (max-width: 800px) and (max-height: 480px) {
+  /* Make the table scrollable horizontally */
+  .cart-table-wrapper {
+    max-height: 300px; /* Reduce height for smaller screens */
+    overflow-y: auto;
+    overflow-x: auto; /* Allow horizontal scrolling */
+  }
+
+  .cart-table {
+    font-size: 14px; /* Reduce font size for readability */
+    width: 100%; /* Keep table width dynamic */
+  }
+
+  .cart-table th,
+  .cart-table td {
+    padding: 5px; /* Reduce padding */
+    font-size: 16px;
+  }
+
+  .product-image {
+    width: 40px; /* Scale down images */
+  }
+
+  /* Adjust promo code input and button alignment */
+  .total-checkout {
+    flex-direction: row; /* Stack elements vertically */
+    gap: 5px; /* Reduce gap between elements */
+    align-items: stretch; /* Align elements to fill the width */
+  }
+
+  .div2 {
+    width: 100%; /* Full width for the promo code input */
+    height: 10%;
+    font-size: 14px;
+    padding: 8px;
+  }
+
+  .apply-button {
+    width: 10%; /* Full width for the button */
+    height: 10%;
+    font-size: 12px;
+    padding: 8px;
+  }
+
+  .promo-message {
+    font-size: 10px; /* Adjust font size for messages */
+    text-align: left;
+  }
+
+  .text-wrapper-14 {
+    font-size: 16px; /* Smaller font for total cart value */
+    margin: 0 auto; /* Center align */
+  }
+
+  .button {
+    width: 30%; /* Full width for the "Proceed to Payment" button */
+    font-size: 14px;
+    padding: 10px;
+    margin: 10px 0; /* Add margin for spacing */
+    text-align: center;
+  }
 }

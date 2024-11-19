@@ -197,3 +197,38 @@
   border-radius: 5px;
   width: 250px;
 }
+
+@media (max-width: 800px) {
+  .details {
+    margin-top: 30px;
+    padding: 5px;
+  }
+
+  .text-wrapper {
+    font-size: 18px;
+    margin-bottom: 15px;
+  }
+
+  .input-group {
+    flex-direction: row; /* Stack input and button vertically */
+    gap: 5px;
+  }
+
+  .email-input {
+    width: 100%; /* Make input take full width */
+    font-size: 14px;
+    padding: 8px;
+  }
+
+  .send-btn {
+    width: 50%; /* Make button take full width */
+    font-size: 14px;
+    padding: 8px;
+  }
+
+  .error-message,
+  .success-message {
+    font-size: 12px;
+    margin-top: 5px;
+  }
+}

@@ -4,7 +4,7 @@ import image from "../../assets/cart.jpg";
 
 const AboutUs = () => {
   return (
-    <div className="content">
+    <div className="content-about">
       <div className="overlap-group">
         <p className="welcome-to-cartease">
           Welcome to CartEase, where innovation meets convenience in the retail

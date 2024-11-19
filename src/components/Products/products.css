@@ -357,6 +357,7 @@
   margin-bottom: 20px;
   width: 100%;
   padding: 10px;
+  margin-top: 10px;
 }
 
 .product-table {
@@ -382,4 +383,27 @@
   padding-top: 12px;
   padding-bottom: 12px;
   font-size: 18px;
+}
+
+/* Media Query for 800x480 resolution */
+@media (max-width: 800px) {
+  .div2 {
+    font-size: 16px; /* Adjust font size for smaller screens */
+    padding: 8px;
+    margin-top: 30px;
+  }
+
+  .product-table th,
+  .product-table td {
+    padding: 5px; /* Reduce padding for compact display */
+    font-size: 16px; /* Smaller font for better fit */
+  }
+
+  .product-image {
+    width: 60px; /* Smaller image size for better fit */
+  }
+
+  .product-table {
+    font-size: 14px; /* Reduce overall table font size */
+  }
 }

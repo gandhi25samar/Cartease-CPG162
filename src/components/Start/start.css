@@ -108,3 +108,34 @@
   white-space: nowrap;
   width: 100%;
 }
+
+/* Media Query for Raspberry Pi 800x480 resolution */
+@media screen and (max-width: 800px) and (max-height: 480px) {
+  .start {
+    padding: 50px;
+    height: 100%; /* Adjust for smaller height */
+  }
+
+  .start .div {
+    padding: 10px;
+    width: 90%; /* Adjust width for a smaller screen */
+  }
+
+  .start .image {
+    height: 200px; /* Reduce image size for small resolution */
+    width: 300px; /* Maintain proportion */
+    object-fit: contain; /* Ensure the image scales nicely */
+  }
+
+  .start .button {
+    height: 60px; /* Reduce button size */
+    width: 200px;
+    margin-top: 15px; /* Adjust spacing between elements */
+    border-radius: 10px; /* Make it consistent with smaller size */
+  }
+
+  .start .text-wrapper {
+    font-size: 20px; /* Adjust text size */
+    line-height: 40px; /* Adjust line height */
+  }
+}

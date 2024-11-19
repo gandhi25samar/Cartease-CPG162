@@ -107,7 +107,7 @@
   height: auto;
   margin: 20px 0; /* Add spacing between promo codes */
   padding: 10px;
-  width: 100%;
+  width: 98.5%;
 }
 
 .promo-codes .code {
@@ -136,4 +136,27 @@
   font-weight: 400;
   letter-spacing: -0.26px;
   line-height: 48px;
+}
+
+/* Media Query for 800x480 resolution */
+@media (max-width: 800px) {
+  .promo-codes .promo-code {
+    margin: 30px 0; /* Reduce margin for smaller screens */
+    padding: 8px; /* Adjust padding */
+    width: 97.5%;
+  }
+
+  .promo-codes .code {
+    font-size: 18px; /* Smaller font size for the code */
+    line-height: 36px; /* Adjust line height */
+  }
+
+  .promo-codes .text-wrapper-6 {
+    font-size: 18px; /* Smaller font size for bold text */
+  }
+
+  .promo-codes .minimum-cart-value {
+    font-size: 16px; /* Reduce font size for description */
+    line-height: 24px; /* Adjust line height */
+  }
 }
