@@ -66,6 +66,7 @@
 // export default LogoAndNavbar;
 import React, { useState } from "react";
 import "./navbar.css";
+import { AiFillCamera } from "react-icons/ai";
 import logo2 from "../../assets/Logo2.png";
 import { Link } from "react-router-dom";
 import CameraFeed from "../CameraFeed/cameraFeed"; // Import the new CameraFeed component
@@ -85,7 +86,7 @@ const LogoAndNavbar = () => {
 
       {/* Camera Button */}
       <button className="camera-button" onClick={toggleCameraFeed}>
-        📷
+        <AiFillCamera />
       </button>
 
       {/* Conditionally Render CameraFeed */}
