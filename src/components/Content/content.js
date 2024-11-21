@@ -63,10 +63,28 @@
 import React from "react";
 import cartItems from "./cart_items";
 import "./content.css";
+import inventory from "../Products/inventory";
 
 const Content = () => {
+  // Map product names from inventory to cart items
+  const updatedCartItems = cartItems.map((cartItem) => {
+    const inventoryItem = inventory.find(
+      (item) => item.name === cartItem.productName
+    );
+    return {
+      ...cartItem,
+      price: inventoryItem?.price || 0, // Default to 0 if not found
+      image: inventoryItem?.image || "default.jpg", // Fallback image
+    };
+  });
+
+  // // Calculate total price
+  // const totalPrice = cartItems.reduce(
+  //   (total, item) => total + item.price * item.qty,
+  //   0
+  // );
   // Calculate total price
-  const totalPrice = cartItems.reduce(
+  const totalPrice = updatedCartItems.reduce(
     (total, item) => total + item.price * item.qty,
     0
   );
@@ -173,7 +191,7 @@ const Content = () => {
             </tr>
           </thead>
           <tbody>
-            {cartItems.map((item, index) => (
+            {updatedCartItems.map((item, index) => (
               <tr>
                 {/*<tr key={item.id} >*/}
                 <td>{index + 1}</td>

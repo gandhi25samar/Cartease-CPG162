@@ -56,6 +56,7 @@
 import React, { useState } from "react";
 import cartItems from "../Content/cart_items";
 import coupons from "../PromoCodes/coupons";
+import inventory from "../Products/inventory";
 import "./contentCheckout.css";
 
 // const ContentCheckout = () => {
@@ -102,8 +103,25 @@ const ContentCheckout = () => {
   const [promoMessage, setPromoMessage] = useState("");
   const [discountedTotal, setDiscountedTotal] = useState(null);
 
+  // // Calculate the total cart value
+  // const totalCartValue = cartItems.reduce(
+  //   (total, item) => total + item.price * item.qty,
+  //   0
+  // );
+  // Map product details from inventory to cart items
+  const updatedCartItems = cartItems.map((cartItem) => {
+    const inventoryItem = inventory.find(
+      (item) => item.name === cartItem.productName
+    );
+    return {
+      ...cartItem,
+      price: inventoryItem?.price || 0, // Default to 0 if not found
+      image: inventoryItem?.image || "default.jpg", // Fallback image
+    };
+  });
+
   // Calculate the total cart value
-  const totalCartValue = cartItems.reduce(
+  const totalCartValue = updatedCartItems.reduce(
     (total, item) => total + item.price * item.qty,
     0
   );
@@ -158,8 +176,9 @@ const ContentCheckout = () => {
             </tr>
           </thead>
           <tbody>
-            {cartItems.map((item, index) => (
-              <tr key={item.id}>
+            {updatedCartItems.map((item, index) => (
+              <tr>
+                {/*<tr key={item.id} >*/}
                 <td>{index + 1}</td>
                 <td>
                   <img
