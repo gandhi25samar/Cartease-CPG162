@@ -174,7 +174,8 @@ const Content = () => {
           </thead>
           <tbody>
             {cartItems.map((item, index) => (
-              <tr key={item.id}>
+              <tr>
+                {/*<tr key={item.id} >*/}
                 <td>{index + 1}</td>
                 <td>
                   <img

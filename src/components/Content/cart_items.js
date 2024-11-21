@@ -29,7 +29,7 @@ const cartItems = [
     image: "thumbsup.jpg",
   },
   {
-    id: 5,
+    // id: 5,
     productName: "Nabati Cheese Wafers",
     qty: 2,
     price: 20,

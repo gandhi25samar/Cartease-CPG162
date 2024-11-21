@@ -70,6 +70,7 @@ const Products = () => {
       <table className="product-table">
         <thead>
           <tr>
+            {/*<tr key={product.id} >*/}
             <th>S.No.</th>
             <th>Product</th>
             <th>Name</th>
@@ -78,7 +79,7 @@ const Products = () => {
         </thead>
         <tbody>
           {filteredProducts.map((product, index) => (
-            <tr key={product.id}>
+            <tr>
               <td>{index + 1}</td>
               <td>
                 <img
