@@ -83,7 +83,7 @@ const Products = () => {
               <td>
                 <img
                   className="product-image"
-                  src={product.image}
+                  src={require(`../../assets/${product.image}`)}
                   alt={product.name}
                 />
               </td>
