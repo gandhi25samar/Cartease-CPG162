@@ -35,6 +35,13 @@ const cartItems = [
     price: 20,
     image: "nabati.jpg",
   },
+  {
+    // id: 6,
+    productName: "Lays American Style Cream & Onion",
+    qty: 5,
+    price: 50,
+    image: "laysgreen50.jpg",
+  },
 ];
 
 export default cartItems;
