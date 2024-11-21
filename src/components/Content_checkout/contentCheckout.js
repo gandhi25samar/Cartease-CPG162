@@ -177,7 +177,7 @@ const ContentCheckout = () => {
           </thead>
           <tbody>
             {updatedCartItems.map((item, index) => (
-              <tr>
+              <tr key={index}>
                 {/*<tr key={item.id} >*/}
                 <td>{index + 1}</td>
                 <td>
