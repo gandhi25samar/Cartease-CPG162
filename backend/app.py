@@ -168,6 +168,8 @@ def process_image():
 
         for item_idx, item_bbox in enumerate(item_detections.xyxy):
             item_name = item_detections.data.get("class_name", ["unknown"])[item_idx]
+            if item_name == "yellow_wafers":
+                item_name = "Nabati Cheese Wafers"
 
             # Update the virtual cart
             if class_name == "item_in":

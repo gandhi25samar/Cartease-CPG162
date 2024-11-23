@@ -28,7 +28,7 @@ const CameraFeed = ({cameraState}) => {
           const data = await response.json();
           console.log("Cart Contents:", data.cart); // Update your UI with cart data
           console.log("Detections:", data.detections); // Log detected items
-          console.log("Detections:", data.camera_blocked); // Log detected items
+          console.log("Camera Blocked? :", data.camera_blocked); // Log detected items
         } catch (error) {
           console.error("Error sending frame to backend:", error);
         }
