@@ -103,8 +103,8 @@ app = Flask(__name__)
 CORS(app)
 
 # Load models
-presence_model = YOLOv10("D:\Semester 6\capstone\project\Cartease-CPG162\src\smodel_64eopch_32batch_1095.pt")
-recog_model = YOLOv10("D:\Semester 6\capstone\project\Cartease-CPG162\src\smodel_26epoch_8batch_102img_onlywafer.pt")
+presence_model = YOLOv10("src/smodel_64eopch_32batch_1095.pt")
+recog_model = YOLOv10("src/smodel_26epoch_8batch_102img_onlywafer.pt")
 
 # Virtual cart to store items
 virtual_cart = {}
@@ -194,4 +194,4 @@ def process_image():
     })
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000)
+    app.run(host="0.0.0.0", port=5000,debug=True)

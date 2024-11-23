@@ -148,15 +148,20 @@ import "./content.css";
 
 const Content = () => {
   const [cartItems, setCartItems] = useState([]);
+  // const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
       const items = await fetchCartItems();
       setCartItems(items);
+      // setLoading(false);
     };
 
     fetchData();
   }, []);
+  // if (loading) {
+  //   return <div>Loading...</div>; // Optional loading indicator
+  // }
 
   // Map cart items with inventory details
   const updatedCartItems = cartItems.map((cartItem) => {

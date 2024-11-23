@@ -80,17 +80,20 @@ const fetchCartItems = async () => {
     const response = await fetch("http://localhost:5000/process-image", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        /* Add your image data if needed */
-      }),
+      body: JSON.stringify({ image: "" }), // Replace with real image data if required
     });
+
+    // if (!response.ok) {
+    //   console.error("Failed to fetch cart items:", response.statusText);
+    //   return [];
+    // }
 
     const data = await response.json();
 
     // Transform backend data into cart items format
-    const cartItems = Object.keys(data.cart).map((itemName) => ({
+    const cartItems = Object.entries(data.cart).map(([itemName, qty]) => ({
       productName: itemName,
-      qty: data.cart[itemName], // Set quantity from the backend's virtual cart
+      qty: qty,
     }));
 
     return cartItems;
