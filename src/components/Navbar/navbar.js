@@ -80,8 +80,7 @@ const LogoAndNavbar = () => {
 
   useEffect(() => {
     console.log(showCamera);
-
-  }, [])
+  }, []);
 
   return (
     <div className="logo-and-navbar">
