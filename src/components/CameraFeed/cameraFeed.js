@@ -2,15 +2,11 @@ import React, { useRef, useEffect } from "react";
 import Webcam from "react-webcam";
 import "./cameraFeed.css";
 
-const CameraFeed = ({cameraState}) => {
+const CameraFeed = ({ cameraState }) => {
   const webcamRef = useRef(null);
-
-
 
   // Function to capture and send frames to the backend
   const sendFrameToBackend = async () => {
-
-    
     if (webcamRef.current) {
       const imageSrc = webcamRef.current.getScreenshot();
       if (imageSrc) {
@@ -42,17 +38,22 @@ const CameraFeed = ({cameraState}) => {
       sendFrameToBackend();
     }, 1000); // Capture every second
 
-
     return () => clearInterval(interval); // Cleanup on component unmount
   }, []);
 
-
- 
-
   return (
+    // <div
+    //   className="webcam-container"
+    //   style={{ opacity: cameraState ? 1 : 0, transition: "opacity 0.5s ease" }}
+    // >
     <div
       className="webcam-container"
-      style={{ opacity: cameraState ? 1 : 0, transition: "opacity 0.5s ease" }}
+      style={{
+        visibility: cameraState ? "visible" : "hidden",
+        pointerEvents: cameraState ? "auto" : "none", // Prevent interaction when hidden
+        opacity: cameraState ? 1 : 0,
+        transition: "opacity 0.5s ease, visibility 0.5s ease",
+      }}
     >
       <Webcam
         audio={false}
