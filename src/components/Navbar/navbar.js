@@ -64,7 +64,7 @@
 //   );
 // };
 // export default LogoAndNavbar;
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./navbar.css";
 import { AiFillCamera } from "react-icons/ai";
 import logo2 from "../../assets/Logo2.png";
@@ -78,6 +78,11 @@ const LogoAndNavbar = () => {
     setShowCamera(!showCamera);
   };
 
+  useEffect(() => {
+    console.log(showCamera);
+
+  }, [])
+
   return (
     <div className="logo-and-navbar">
       <a href="/Home">
@@ -90,7 +95,7 @@ const LogoAndNavbar = () => {
       </button>
 
       {/* Conditionally Render CameraFeed */}
-      {showCamera && <CameraFeed />}
+      <CameraFeed cameraState={showCamera} />
 
       <div className="navbar">
         <Link
