@@ -1,0 +1,59 @@
+/* .alert-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: #000000;
+  color: #ffffff;
+  text-align: center;
+  font-family: Arial, sans-serif;
+}
+.alert-image {
+  width: 150px;
+  height: auto;
+  margin-bottom: 20px;
+}
+.alert-text {
+  margin: 5px 0;
+  font-size: 16px;
+} */
+.alert-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: #000000;
+  color: #ffffff;
+  text-align: center;
+  font-family: Arial, sans-serif;
+  border: none; /* Removed white border */
+  margin: 0; /* Ensure no extra spacing */
+}
+
+.alert-image {
+  width: 200px; /* Increased size */
+  height: auto;
+  margin-bottom: 20px;
+}
+
+.alert-text {
+  margin: 10px 0; /* Added some more spacing */
+  font-size: 25px; /* Increased font size */
+}
+
+/* Media query for Raspberry Pi screen (800x480) */
+@media (max-width: 800px) and (max-height: 480px) {
+  .alert-container {
+    padding: 10px; /* Ensure proper layout on smaller screens */
+  }
+
+  .alert-image {
+    width: 150px; /* Slightly smaller for Raspberry Pi */
+  }
+
+  .alert-text {
+    font-size: 18px; /* Adjusted text size for readability */
+  }
+}
