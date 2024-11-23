@@ -79,7 +79,7 @@ const Products = () => {
         </thead>
         <tbody>
           {filteredProducts.map((product, index) => (
-            <tr>
+            <tr key={index}>
               <td>{index + 1}</td>
               <td>
                 <img

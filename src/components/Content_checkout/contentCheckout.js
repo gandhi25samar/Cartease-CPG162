@@ -53,55 +53,26 @@
 // };
 // export default ContentCheckout;
 
-import React, { useState } from "react";
-import cartItems from "../Content/cart_items";
+import React, { useState, useEffect } from "react";
+import fetchCartItems from "../Content/cart_items";
 import coupons from "../PromoCodes/coupons";
 import inventory from "../Products/inventory";
 import "./contentCheckout.css";
-
-// const ContentCheckout = () => {
-//   const [promoCode, setPromoCode] = useState("");
-//   const [discount, setDiscount] = useState(0);
-//   const [message, setMessage] = useState("");
-
-//   // Calculate total cart value before discount
-//   const totalCartValue = cartItems.reduce(
-//     (total, item) => total + item.price * item.qty,
-//     0
-//   );
-
-//   // Calculate total cart value after applying discount
-//   const discountedValue = totalCartValue - discount;
-
-//   const applyPromoCode = () => {
-//     const coupon = coupons.find((c) => c.code === promoCode);
-
-//     if (!coupon) {
-//       setMessage("Invalid Promo Code");
-//       setDiscount(0);
-//     } else if (totalCartValue < coupon.minValue) {
-//       setMessage("Minimum cart value not met");
-//       setDiscount(0);
-//     } else {
-//       if (coupon.code === "GET10") {
-//         const discountAmount = Math.min(totalCartValue * 0.1, 150);
-//         setDiscount(discountAmount);
-//         setMessage("Promo Code Applied");
-//       } else if (coupon.code === "FLAT200") {
-//         setDiscount(200);
-//         setMessage("Promo Code Applied");
-//       } else if (coupon.code === "PAYDAYDEAL") {
-//         const discountAmount = Math.min(totalCartValue * 0.2, 500);
-//         setDiscount(discountAmount);
-//         setMessage("Promo Code Applied");
-//       }
-//     }
-//   };
 
 const ContentCheckout = () => {
   const [promoCode, setPromoCode] = useState("");
   const [promoMessage, setPromoMessage] = useState("");
   const [discountedTotal, setDiscountedTotal] = useState(null);
+  const [cartItems, setCartItems] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const items = await fetchCartItems();
+      setCartItems(items);
+    };
+
+    fetchData();
+  }, []);
 
   // // Calculate the total cart value
   // const totalCartValue = cartItems.reduce(
@@ -177,7 +148,7 @@ const ContentCheckout = () => {
           </thead>
           <tbody>
             {updatedCartItems.map((item, index) => (
-              <tr>
+              <tr key={index}>
                 {/*<tr key={item.id} >*/}
                 <td>{index + 1}</td>
                 <td>

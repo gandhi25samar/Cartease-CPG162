@@ -60,13 +60,105 @@
 // export default Content;
 
 // content.js
-import React from "react";
-import cartItems from "./cart_items";
-import "./content.css";
+// import React from "react";
+// import cartItems from "./cart_items";
+// import "./content.css";
+// import inventory from "../Products/inventory";
+
+// const Content = () => {
+//   // Map product names from inventory to cart items
+//   const updatedCartItems = cartItems.map((cartItem) => {
+//     const inventoryItem = inventory.find(
+//       (item) => item.name === cartItem.productName
+//     );
+//     return {
+//       ...cartItem,
+//       price: inventoryItem?.price || 0, // Default to 0 if not found
+//       image: inventoryItem?.image || "default.jpg", // Fallback image
+//     };
+//   });
+
+//   // // Calculate total price
+//   // const totalPrice = cartItems.reduce(
+//   //   (total, item) => total + item.price * item.qty,
+//   //   0
+//   // );
+//   // Calculate total price
+//   const totalPrice = updatedCartItems.reduce(
+//     (total, item) => total + item.price * item.qty,
+//     0
+//   );
+
+//   return (
+//     <div className="content">
+//       <div className="cart-table-wrapper-home">
+//         <table className="cart-table">
+//           <thead>
+//             <tr>
+//               <th>S.No.</th>
+//               <th>Product</th>
+//               <th>Name</th>
+//               <th>Qty</th>
+//               <th>Price</th>
+//             </tr>
+//           </thead>
+//           <tbody>
+//             {updatedCartItems.map((item, index) => (
+//               <tr key={index}>
+//                 {/*<tr key={item.id} >*/}
+//                 <td>{index + 1}</td>
+//                 <td>
+//                   <img
+//                     src={require(`../../assets/${item.image}`)}
+//                     alt={item.productName}
+//                     className="product-image"
+//                   />
+//                 </td>
+//                 <td>{item.productName}</td>
+//                 <td>{item.qty}</td>
+//                 <td>₹{item.price}</td>
+//               </tr>
+//             ))}
+//           </tbody>
+//         </table>
+//       </div>
+
+//       <div className="total-checkout">
+//         <div className="total-cart-value">Total Cart Value: ₹{totalPrice}</div>
+//         <button className="button">
+//           <a
+//             href="/Checkout"
+//             className="checkout-link"
+//             style={{ textDecoration: "none" }}
+//           >
+//             PROCEED TO CHECKOUT
+//           </a>
+//         </button>
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default Content;
+
+import React, { useState, useEffect } from "react";
+import fetchCartItems from "./cart_items";
 import inventory from "../Products/inventory";
+import "./content.css";
 
 const Content = () => {
-  // Map product names from inventory to cart items
+  const [cartItems, setCartItems] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const items = await fetchCartItems();
+      setCartItems(items);
+    };
+
+    fetchData();
+  }, []);
+
+  // Map cart items with inventory details
   const updatedCartItems = cartItems.map((cartItem) => {
     const inventoryItem = inventory.find(
       (item) => item.name === cartItem.productName
@@ -78,106 +170,12 @@ const Content = () => {
     };
   });
 
-  // // Calculate total price
-  // const totalPrice = cartItems.reduce(
-  //   (total, item) => total + item.price * item.qty,
-  //   0
-  // );
-  // Calculate total price
   const totalPrice = updatedCartItems.reduce(
     (total, item) => total + item.price * item.qty,
     0
   );
 
   return (
-    // <div className="content">
-    //   <table className="cart-table">
-    //     <thead>
-    //       <tr>
-    //         <th>S.No.</th>
-    //         <th>Product</th>
-    //         <th>Name</th>
-    //         <th>Qty</th>
-    //         <th>Price</th>
-    //       </tr>
-    //     </thead>
-    //     <tbody>
-    //       {cartItems.map((item, index) => (
-    //         <tr key={item.id}>
-    //           <td>{index + 1}</td>
-    //           <td>
-    //             <img
-    //               src={require(`../../assets/${item.image}`)}
-    //               alt={item.productName}
-    //               className="product-image"
-    //             />
-    //           </td>
-    //           <td>{item.productName}</td>
-    //           <td>{item.qty}</td>
-    //           <td>₹{item.price}</td>
-    //         </tr>
-    //       ))}
-    //     </tbody>
-    //   </table>
-
-    //   <div className="total-checkout">
-    //     <div className="total-cart-value">Total Cart Value: ₹{totalPrice}</div>
-    //     <button className="button">
-    //       <a
-    //         href="/Checkout"
-    //         className="checkout-link"
-    //         style={{ textDecoration: "none" }}
-    //       >
-    //         PROCEED TO CHECKOUT
-    //       </a>
-    //     </button>
-    //   </div>
-    // </div>
-    // <div className="content">
-    //   <div className="cart-table-wrapper">
-    //     <table className="cart-table">
-    //       <thead>
-    //         <tr>
-    //           <th>S.No.</th>
-    //           <th>Product</th>
-    //           <th>Name</th>
-    //           <th>Qty</th>
-    //           <th>Price</th>
-    //         </tr>
-    //       </thead>
-    //       <tbody>
-    //         {cartItems.map((item, index) => (
-    //           <tr key={item.id}>
-    //             <td>{index + 1}</td>
-    //             <td>
-    //               <img
-    //                 src={require(`../../assets/${item.image}`)}
-    //                 alt={item.productName}
-    //                 className="product-image"
-    //               />
-    //             </td>
-    //             <td>{item.productName}</td>
-    //             <td>{item.qty}</td>
-    //             <td>₹{item.price}</td>
-    //           </tr>
-    //         ))}
-    //       </tbody>
-    //     </table>
-    //   </div>
-
-    //   <div className="total-checkout">
-    //     <div className="total-cart-value">Total Cart Value: ₹{totalPrice}</div>
-    //     <button className="button">
-    //       <a
-    //         href="/Checkout"
-    //         className="checkout-link"
-    //         style={{ textDecoration: "none" }}
-    //       >
-    //         PROCEED TO CHECKOUT
-    //       </a>
-    //     </button>
-    //   </div>
-    // </div>
     <div className="content">
       <div className="cart-table-wrapper-home">
         <table className="cart-table">
@@ -192,8 +190,7 @@ const Content = () => {
           </thead>
           <tbody>
             {updatedCartItems.map((item, index) => (
-              <tr>
-                {/*<tr key={item.id} >*/}
+              <tr key={index}>
                 <td>{index + 1}</td>
                 <td>
                   <img

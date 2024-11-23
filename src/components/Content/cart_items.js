@@ -46,31 +46,58 @@
 
 // export default cartItems;
 
-const cartItems = [
-  {
-    productName: "Treat Chocolate Wafers",
-    qty: 1,
-  },
-  {
-    productName: "Bourbon Chocolate Biscuits",
-    qty: 1,
-  },
-  {
-    productName: "Tide Matic Top Load Detergent",
-    qty: 20,
-  },
-  {
-    productName: "Thums Up 1L Soft Drink",
-    qty: 6,
-  },
-  {
-    productName: "Nabati Cheese Wafers",
-    qty: 2,
-  },
-  {
-    productName: "Lays American Style Cream & Onion",
-    qty: 5,
-  },
-];
+// const cartItems = [
+//   {
+//     productName: "Treat Chocolate Wafers",
+//     qty: 1,
+//   },
+//   {
+//     productName: "Bourbon Chocolate Biscuits",
+//     qty: 1,
+//   },
+//   {
+//     productName: "Tide Matic Top Load Detergent",
+//     qty: 20,
+//   },
+//   {
+//     productName: "Thums Up 1L Soft Drink",
+//     qty: 6,
+//   },
+//   {
+//     productName: "Nabati Cheese Wafers",
+//     qty: 2,
+//   },
+//   {
+//     productName: "Lays American Style Cream & Onion",
+//     qty: 5,
+//   },
+// ];
 
-export default cartItems;
+// export default cartItems;
+
+const fetchCartItems = async () => {
+  try {
+    const response = await fetch("http://localhost:5000/process-image", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        /* Add your image data if needed */
+      }),
+    });
+
+    const data = await response.json();
+
+    // Transform backend data into cart items format
+    const cartItems = Object.keys(data.cart).map((itemName) => ({
+      productName: itemName,
+      qty: data.cart[itemName], // Set quantity from the backend's virtual cart
+    }));
+
+    return cartItems;
+  } catch (error) {
+    console.error("Error fetching cart items:", error);
+    return [];
+  }
+};
+
+export default fetchCartItems;

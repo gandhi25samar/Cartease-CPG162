@@ -8,6 +8,7 @@ import PromoCodes from "./components/PromoCodes/promocode";
 import Checkout from "./components/Checkout/checkout";
 import ContentCheckout from "./components/Content_checkout/contentCheckout";
 import Products from "./components/Products/products";
+import Alert from "./components/Alert/alert";
 
 function App() {
   return (
@@ -52,6 +53,7 @@ function App() {
             </>
           }
         ></Route>
+        <Route path="/Alert" element={<Alert />}></Route>
       </Routes>
     </BrowserRouter>
   );
