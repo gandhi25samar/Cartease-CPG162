@@ -1,9 +1,11 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useContext } from "react";
 import Webcam from "react-webcam";
+import { CartContext } from "../CartContext";
 import "./cameraFeed.css";
 
 const CameraFeed = ({ cameraState }) => {
   const webcamRef = useRef(null);
+  const { setCart } = useContext(CartContext);
 
   // Function to capture and send frames to the backend
   const sendFrameToBackend = async () => {
@@ -25,6 +27,7 @@ const CameraFeed = ({ cameraState }) => {
           console.log("Cart Contents:", data.cart); // Update your UI with cart data
           console.log("Detections:", data.detections); // Log detected items
           console.log("Camera Blocked? :", data.camera_blocked); // Log detected items
+          setCart(data.cart);
         } catch (error) {
           console.error("Error sending frame to backend:", error);
         }

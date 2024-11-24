@@ -187,9 +187,6 @@ def process_image():
                 "action": class_name,
                 "confidence": float(presence_detections.confidence[idx])
             })
-    
-
-
     return jsonify({
         "cart": virtual_cart,
         "detections": items_detected,

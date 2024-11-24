@@ -53,10 +53,11 @@
 // };
 // export default ContentCheckout;
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import fetchCartItems from "../Content/cart_items";
 import coupons from "../PromoCodes/coupons";
 import inventory from "../Products/inventory";
+import { CartContext } from "../CartContext";
 import "./contentCheckout.css";
 
 const ContentCheckout = () => {
@@ -64,15 +65,20 @@ const ContentCheckout = () => {
   const [promoMessage, setPromoMessage] = useState("");
   const [discountedTotal, setDiscountedTotal] = useState(null);
   const [cartItems, setCartItems] = useState([]);
+  const { cart } = useContext(CartContext);
 
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     const items = await fetchCartItems();
+  //     setCartItems(items);
+  //   };
+
+  //   fetchData();
+  // }, []);
   useEffect(() => {
-    const fetchData = async () => {
-      const items = await fetchCartItems();
-      setCartItems(items);
-    };
-
-    fetchData();
-  }, []);
+    const items = fetchCartItems(cart); // Pass cart to fetchCartItems
+    setCartItems(items);
+  }, [cart]);
 
   // // Calculate the total cart value
   // const totalCartValue = cartItems.reduce(

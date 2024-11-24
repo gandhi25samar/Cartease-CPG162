@@ -141,24 +141,30 @@
 
 // export default Content;
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import fetchCartItems from "./cart_items";
 import inventory from "../Products/inventory";
+import { CartContext } from "../CartContext";
 import "./content.css";
 
 const Content = () => {
   const [cartItems, setCartItems] = useState([]);
   // const [loading, setLoading] = useState(true);
+  const { cart } = useContext(CartContext);
 
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     const items = await fetchCartItems(cart);
+  //     setCartItems(items);
+  //     // setLoading(false);
+  //   };
+
+  //   fetchData();
+  // }, [cart]);
   useEffect(() => {
-    const fetchData = async () => {
-      const items = await fetchCartItems();
-      setCartItems(items);
-      // setLoading(false);
-    };
-
-    fetchData();
-  }, []);
+    const items = fetchCartItems(cart); // Pass cart to fetchCartItems
+    setCartItems(items);
+  }, [cart]);
   // if (loading) {
   //   return <div>Loading...</div>; // Optional loading indicator
   // }

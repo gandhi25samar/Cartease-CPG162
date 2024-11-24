@@ -75,32 +75,67 @@
 
 // export default cartItems;
 
-const fetchCartItems = async () => {
-  try {
-    const response = await fetch("http://localhost:5000/process-image", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ image: "" }), // Replace with real image data if required
-    });
+// const fetchCartItems = async () => {
+//   try {
+//     const response = await fetch("http://localhost:5000/process-image", {
+//       method: "POST",
+//       headers: { "Content-Type": "application/json" },
+//       body: JSON.stringify({ image: "" }), // Replace with real image data if required
+//     });
 
-    // if (!response.ok) {
-    //   console.error("Failed to fetch cart items:", response.statusText);
-    //   return [];
-    // }
-    const data = await response.json();
-    console.log("Cart: ", data.cart)
+//     // if (!response.ok) {
+//     //   console.error("Failed to fetch cart items:", response.statusText);
+//     //   return [];
+//     // }
 
-    // Transform backend data into cart items format
-    const cartItems = Object.entries(data.cart).map(([itemName, qty]) => ({
-      productName: itemName,
-      qty: qty,
-    }));
+//     const data = await response.json();
+//     // Transform backend data into cart items format
+//     const cartItems = Object.entries(data.cart).map(([itemName, qty]) => ({
+//       productName: itemName,
+//       qty: qty,
+//     }));
 
-    return cartItems;
-  } catch (error) {
-    console.error("Error fetching cart items:", error);
-    return [];
-  }
+//     return cartItems;
+//   } catch (error) {
+//     console.error("Error fetching cart items:", error);
+//     return [];
+//   }
+// };
+
+// export default fetchCartItems;
+
+// import { useContext } from "react";
+// import { CartContext } from "../CartContext";
+
+const fetchCartItems = (cart) => {
+  //const { cart } = useContext(CartContext);
+
+  // Transform the cart data into the desired format
+  const cartItems = Object.entries(cart).map(([itemName, qty]) => ({
+    productName: itemName,
+    qty: qty,
+  }));
+
+  return cartItems;
 };
 
 export default fetchCartItems;
+// const fetchCartItems = async () => {
+//   try {
+//     const response = await fetch("http://localhost:5000/process-image", {
+//       method: "POST",
+//       headers: { "Content-Type": "application/json" },
+//       body: JSON.stringify({ image: "" }),
+//     });
+//     const data = await response.json();
+//     return Object.entries(data.cart).map(([itemName, qty]) => ({
+//       productName: itemName,
+//       qty,
+//     }));
+//   } catch (error) {
+//     console.error("Error fetching cart items:", error);
+//     return [];
+//   }
+// };
+
+// export default fetchCartItems;
