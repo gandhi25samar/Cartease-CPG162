@@ -98,7 +98,8 @@ import cv2
 import numpy as np
 import base64
 import supervision as sv
-
+import random
+import time
 app = Flask(__name__)
 CORS(app)
 
@@ -186,6 +187,8 @@ def process_image():
                 "action": class_name,
                 "confidence": float(presence_detections.confidence[idx])
             })
+    
+
 
     return jsonify({
         "cart": virtual_cart,

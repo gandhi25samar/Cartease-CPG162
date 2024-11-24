@@ -87,8 +87,8 @@ const fetchCartItems = async () => {
     //   console.error("Failed to fetch cart items:", response.statusText);
     //   return [];
     // }
-
     const data = await response.json();
+    console.log("Cart: ", data.cart)
 
     // Transform backend data into cart items format
     const cartItems = Object.entries(data.cart).map(([itemName, qty]) => ({

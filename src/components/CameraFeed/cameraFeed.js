@@ -66,3 +66,4 @@ const CameraFeed = ({ cameraState }) => {
 };
 
 export default CameraFeed;
+
