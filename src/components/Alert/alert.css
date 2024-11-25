@@ -40,7 +40,33 @@
 
 .alert-text {
   margin: 10px 0; /* Added some more spacing */
-  font-size: 25px; /* Increased font size */
+  font-size: 30px; /* Increased font size */
+}
+
+.button-alert {
+  all: unset;
+  background: linear-gradient(
+    180deg,
+    rgb(193, 58, 58) 0%,
+    rgb(185, 81, 39) 100%
+  );
+  border-radius: 20px;
+  box-sizing: border-box;
+  height: 70px;
+  margin-top: 20px; /* Space between the image and button */
+  width: 332px;
+  text-align: center;
+}
+
+.text-wrapper {
+  color: #000000cc;
+  font-family: "Inter-Regular", Helvetica;
+  font-size: 30px;
+  font-weight: 350;
+  letter-spacing: -0.39px;
+  line-height: 70px;
+  white-space: nowrap;
+  width: 100%;
 }
 
 /* Media query for Raspberry Pi screen (800x480) */

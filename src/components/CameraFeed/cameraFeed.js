@@ -1,4 +1,5 @@
 import React, { useRef, useEffect, useContext } from "react";
+import { useNavigate } from "react-router-dom"; // Import useNavigate
 import Webcam from "react-webcam";
 import { CartContext } from "../CartContext";
 import "./cameraFeed.css";
@@ -6,6 +7,7 @@ import "./cameraFeed.css";
 const CameraFeed = ({ cameraState }) => {
   const webcamRef = useRef(null);
   const { setCart } = useContext(CartContext);
+  const navigate = useNavigate(); // Initialize the navigate function
 
   // Function to capture and send frames to the backend
   const sendFrameToBackend = async () => {
@@ -28,6 +30,11 @@ const CameraFeed = ({ cameraState }) => {
           console.log("Detections:", data.detections); // Log detected items
           console.log("Camera Blocked? :", data.camera_blocked); // Log detected items
           setCart(data.cart);
+
+          // Check if camera is blocked and navigate to "/Alert"
+          if (data.camera_blocked) {
+            navigate("/Alert");
+          }
         } catch (error) {
           console.error("Error sending frame to backend:", error);
         }
