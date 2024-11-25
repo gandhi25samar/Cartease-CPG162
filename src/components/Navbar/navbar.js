@@ -78,9 +78,9 @@ const LogoAndNavbar = () => {
     setShowCamera(!showCamera);
   };
 
-  useEffect(() => {
-    console.log(showCamera);
-  }, []);
+  // useEffect(() => {
+  //   console.log(showCamera);
+  // }, []);
 
   return (
     <div className="logo-and-navbar">

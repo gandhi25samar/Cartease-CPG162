@@ -39,7 +39,7 @@ const CameraFeed = ({ cameraState }) => {
   useEffect(() => {
     const interval = setInterval(() => {
       sendFrameToBackend();
-    }, 1000); // Capture every second
+    }, 800); // Capture every second
 
     return () => clearInterval(interval); // Cleanup on component unmount
   }, []);

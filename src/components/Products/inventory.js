@@ -44,13 +44,13 @@ const inventory = [
   },
   {
     // id: 8,
-    name: "Lays American Style Cream & Onion",
+    name: "Lays American Style Cream & Onion - 50",
     price: 50,
     image: "laysgreen50.jpg",
   },
   {
     // id: 9,
-    name: "Lays American Style Cream & Onion",
+    name: "Lays American Style Cream & Onion - 20",
     price: 20,
     image: "laysgreen20.jpg",
   },

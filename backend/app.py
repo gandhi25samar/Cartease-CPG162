@@ -105,7 +105,7 @@ CORS(app)
 
 # Load models
 presence_model = YOLOv10("src/smodel_64eopch_32batch_1095.pt")
-recog_model = YOLOv10("src/smodel_26epoch_8batch_102img_onlywafer.pt")
+recog_model = YOLOv10("src/smodel_64epoch_32batch_1116img_recog.pt")
 
 # Virtual cart to store items
 virtual_cart = {}
@@ -169,14 +169,18 @@ def process_image():
 
         for item_idx, item_bbox in enumerate(item_detections.xyxy):
             item_name = item_detections.data.get("class_name", ["unknown"])[item_idx]
-            if item_name == "yellow_wafers":
-                item_name = "Nabati Cheese Wafers"
+            if item_name == "lays_green_20":
+                item_name = "Lays American Style Cream & Onion - 20"
+            elif item_name == "lays_green_50":
+                item_name = "Lays American Style Cream & Onion - 50"
 
             # Update the virtual cart
             if class_name == "item_in":
                 virtual_cart[item_name] = virtual_cart.get(item_name, 0) + 1
             elif class_name == "item_out" and virtual_cart.get(item_name, 0) > 0:
                 virtual_cart[item_name] -= 1
+                if virtual_cart[item_name] == 0:
+                    del virtual_cart[item_name]
 
             # Mark the bounding box as processed
             processed_objects.add(bbox_hash)
