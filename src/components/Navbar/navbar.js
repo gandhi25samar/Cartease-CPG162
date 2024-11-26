@@ -68,11 +68,12 @@ import React, { useEffect, useState } from "react";
 import "./navbar.css";
 import { AiFillCamera } from "react-icons/ai";
 import logo2 from "../../assets/Logo2.png";
-import { Link } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 import CameraFeed from "../CameraFeed/cameraFeed"; // Import the new CameraFeed component
 
 const LogoAndNavbar = () => {
   const [showCamera, setShowCamera] = useState(false);
+  const location = useLocation(); // Get current route
 
   const toggleCameraFeed = () => {
     setShowCamera(!showCamera);
@@ -89,12 +90,16 @@ const LogoAndNavbar = () => {
       </a>
 
       {/* Camera Button */}
-      <button className="camera-button" onClick={toggleCameraFeed}>
-        <AiFillCamera />
-      </button>
+      {location.pathname !== "/Checkout" && (
+        <button className="camera-button" onClick={toggleCameraFeed}>
+          <AiFillCamera />
+        </button>
+      )}
 
       {/* Conditionally Render CameraFeed */}
-      <CameraFeed cameraState={showCamera} />
+      {location.pathname !== "/Checkout" && (
+        <CameraFeed cameraState={showCamera} />
+      )}
 
       <div className="navbar">
         <Link
