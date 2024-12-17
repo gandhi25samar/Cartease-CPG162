@@ -93,7 +93,11 @@ import inventory from "../Products/inventory";
 import { CartContext } from "../CartContext";
 
 const Checkout = () => {
-  const predefinedEmails = ["arew_be21@thapar.edu", "sgandhi_be21@thapar.edu"];
+  const predefinedEmails = [
+    "arew_be21@thapar.edu",
+    "capstone162tiet@gmail.com",
+    "sgandhi_be21@thapar.edu",
+  ];
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
