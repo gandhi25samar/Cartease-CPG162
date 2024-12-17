@@ -102,7 +102,13 @@ const ContentCheckout = () => {
     (total, item) => total + item.price * item.qty,
     0
   );
-  const newTotal = totalCartValue - discountedTotal;
+  // const newTotal = totalCartValue - discountedTotal;
+  const newTotal = totalCartValue - (discountedTotal || 0);
+
+  // **Filter eligible promo codes based on cart value**
+  const eligibleCoupons = coupons.filter(
+    (coupon) => totalCartValue >= coupon.minValue
+  );
 
   // Handle promo code application
   const applyPromoCode = () => {
@@ -174,13 +180,20 @@ const ContentCheckout = () => {
         </table>
       </div>
       <div className="total-checkout">
-        <input
+        <select
           className="div3"
           placeholder="Apply Promo Code"
           type="text"
           value={promoCode}
           onChange={(e) => setPromoCode(e.target.value.toUpperCase())}
-        />
+        >
+          <option value="">Select Promo Code</option>
+          {eligibleCoupons.map((coupon) => (
+            <option key={coupon.code} value={coupon.code}>
+              {coupon.code} - {coupon.description}
+            </option>
+          ))}
+        </select>
         <button onClick={applyPromoCode} className="apply-button">
           Apply
         </button>

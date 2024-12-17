@@ -93,6 +93,7 @@ import inventory from "../Products/inventory";
 import { CartContext } from "../CartContext";
 
 const Checkout = () => {
+  const predefinedEmails = ["arew_be21@thapar.edu", "sgandhi_be21@thapar.edu"];
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -192,13 +193,20 @@ const Checkout = () => {
 
       <div className="email">
         <div className="input-group">
-          <input
+          <select
             className="email-input"
             placeholder="Email Address"
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-          />
+          >
+            <option value="">Select Email Address</option>
+            {predefinedEmails.map((emailOption, index) => (
+              <option key={index} value={emailOption}>
+                {emailOption}
+              </option>
+            ))}
+          </select>
           <button
             className="send-btn"
             onClick={sendEmail}

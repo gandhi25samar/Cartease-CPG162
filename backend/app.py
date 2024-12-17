@@ -546,7 +546,7 @@ def process_image():
     # # Save the annotated frame
     # output_path = os.path.join(output_folder, "annotated_image.jpg")
     # cv2.imwrite(output_path, presence_annotated_frame)
-
+    # virtual_cart = {"Nabati Cheese Wafers" : 90}
     # Return the response
     return jsonify({
         "cart": virtual_cart,

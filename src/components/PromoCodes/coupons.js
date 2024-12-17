@@ -1,19 +1,19 @@
 const coupons = [
   {
     code: "GET10",
-    minValue: 1000,
+    minValue: 50,
     discount: 0.1,
-    maxDiscount: 150,
+    maxDiscount: 5,
     description:
-      "Apply this promo code to get a flat 10% off on your cart value up to ₹150.",
+      "Apply this promo code to get a flat 10% off on your cart value up to ₹5.",
   },
   {
-    code: "FLAT200",
-    minValue: 1800,
+    code: "FLAT20",
+    minValue: 100,
     discount: 1,
-    maxDiscount: 200,
+    maxDiscount: 20,
     description:
-      "Apply this promo code to get a flat ₹200 off on your cart value.",
+      "Apply this promo code to get a flat ₹20 off on your cart value.",
   },
   {
     code: "FLAT250",
