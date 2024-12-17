@@ -86,19 +86,40 @@
 
 // export default Checkout;
 
-import React, { useState } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import "./checkout.css";
-import cartItems from "../Content/cart_items";
+import fetchCartItems from "../Content/cart_items";
+import inventory from "../Products/inventory";
+import { CartContext } from "../CartContext";
 
 const Checkout = () => {
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
+  const [cartItems, setCartItems] = useState([]);
+  const { cart } = useContext(CartContext);
 
+  useEffect(() => {
+    const items = fetchCartItems(cart); // Pass cart to fetchCartItems
+    setCartItems(items);
+  }, [cart]);
+  const updatedCartItems = cartItems.map((cartItem) => {
+    const inventoryItem = inventory.find(
+      (item) => item.name === cartItem.productName
+    );
+    return {
+      ...cartItem,
+      price: inventoryItem?.price || 0, // Default to 0 if not found
+      image: inventoryItem?.image || "default.jpg", // Fallback image
+    };
+  });
   // Function to calculate total cart value
   const calculateTotal = () => {
-    return cartItems.reduce((total, item) => total + item.price * item.qty, 0);
+    return updatedCartItems.reduce(
+      (total, item) => total + item.price * item.qty,
+      0
+    );
   };
 
   // Function to send the bill email
@@ -122,7 +143,7 @@ const Checkout = () => {
     </tr>
   </thead>
   <tbody>
-    ${cartItems
+    ${updatedCartItems
       .map(
         (item, index) =>
           `<tr>
