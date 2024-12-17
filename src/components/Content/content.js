@@ -143,6 +143,7 @@
 
 import React, { useState, useEffect, useContext } from "react";
 import fetchCartItems from "./cart_items";
+import { Link } from "react-router-dom";
 import inventory from "../Products/inventory";
 import { CartContext } from "../CartContext";
 import "./content.css";
@@ -222,13 +223,13 @@ const Content = () => {
       <div className="total-checkout">
         <div className="total-cart-value">Total Cart Value: ₹{totalPrice}</div>
         <button className="button">
-          <a
-            href="/Checkout"
+          <Link
+            to="/Checkout"
             className="checkout-link"
             style={{ textDecoration: "none" }}
           >
             PROCEED TO CHECKOUT
-          </a>
+          </Link>
         </button>
       </div>
     </div>
