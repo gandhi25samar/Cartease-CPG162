@@ -512,7 +512,7 @@ def process_image():
             if largest_idx < len(presence_detections.data.get("class_name", [])) else "unknown"
 
         cropped_frame = frame[y_min:y_max, x_min:x_max]
-
+        #cropped_frame = frame[max(0, y_min):max(0, y_max - 25), max(0, x_min + 225):max(0, x_max - 225)]
         # Run the recognition model on the cropped frame
         item_results = recog_model(cropped_frame)[0]
         item_detections = sv.Detections.from_ultralytics(item_results)
