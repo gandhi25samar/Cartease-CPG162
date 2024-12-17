@@ -455,13 +455,13 @@ CORS(app)
 # Load models
 presence_model = YOLOv10("src/smodel_64eopch_32batch_1095.pt")
 recog_model = YOLOv10("src/smodel_64epoch_32batch_1116img_recog.pt")
-
+virtual_cart = {}
 no_cart_frames = 0  # Counter for frames without a "cart"
 ALERT_THRESHOLD = 2  # 2 seconds worth of frames
-
+camera = False
 @app.route("/process-image", methods=["POST"])
 def process_image():
-    global no_cart_frames
+    global no_cart_frames, virtual_cart, camera
     # Reset the virtual cart for each request
     virtual_cart = {}
 
@@ -474,8 +474,8 @@ def process_image():
     image_data = base64.b64decode(data["image"])
     nparr = np.frombuffer(image_data, np.uint8)
     frame = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
-    if frame is None:
-        return jsonify({"error": "Failed to decode image data"}), 400
+    # if frame is None:
+    #     return jsonify({"error": "Failed to decode image data"}), 400
 
     # Run the presence detection model
     presence_results = presence_model(frame)[0]
@@ -497,10 +497,11 @@ def process_image():
 
     if cart_detected:
         no_cart_frames = 0
+        camera = False
     else:
         no_cart_frames+= 1
         if no_cart_frames > ALERT_THRESHOLD:
-            camera_blocked = True
+            camera = True
     if len(bbox_array) > 0:
         areas = [(bbox[2] - bbox[0]) * (bbox[3] - bbox[1]) for bbox in bbox_array]
         largest_idx = np.argmax(areas)
@@ -510,7 +511,7 @@ def process_image():
         class_name = presence_detections.data.get("class_name", [])[largest_idx] \
             if largest_idx < len(presence_detections.data.get("class_name", [])) else "unknown"
 
-        cropped_frame = frame[y_min:y_max - 25, x_min + 225:x_max - 225]
+        cropped_frame = frame[y_min:y_max, x_min:x_max]
 
         # Run the recognition model on the cropped frame
         item_results = recog_model(cropped_frame)[0]
@@ -539,7 +540,7 @@ def process_image():
             items_detected.append({
                 "name": item_name,
                 "action": class_name,
-                "confidence": float(presence_detections.confidence[largest_idx])
+                # "confidence": float(presence_detections.confidence[largest_idx])
             })
 
     # # Save the annotated frame
@@ -550,7 +551,7 @@ def process_image():
     return jsonify({
         "cart": virtual_cart,
         "detections": items_detected,
-        "camera_blocked": camera_blocked
+        "camera_blocked": camera
     })
 
 if __name__ == "__main__":
