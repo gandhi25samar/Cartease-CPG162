@@ -151,7 +151,7 @@ const ContentCheckout = () => {
     };
 
     try {
-      const response = await fetch("http://localhost:5000/finalize-cart", {
+      const response = await fetch("http://172.16.38.39:5000/finalize-cart", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
