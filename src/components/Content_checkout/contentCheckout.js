@@ -144,6 +144,36 @@ const ContentCheckout = () => {
     }
   };
 
+  const handleProceedToPayment = async () => {
+    const requestBody = {
+      cartItems: updatedCartItems,
+      totalValue: newTotal,
+    };
+
+    try {
+      const response = await fetch("http://localhost:5000/finalize-cart", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(requestBody),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to finalize the cart. Please try again.");
+      }
+
+      const result = await response.json();
+      console.log("Cart finalized successfully:", result);
+
+      // Optionally redirect the user or show a success message
+      alert("Cart finalized successfully! Proceeding to payment...");
+    } catch (error) {
+      console.error("Error:", error.message);
+      alert("Failed to finalize the cart. Please try again.");
+    }
+  };
+
   return (
     <div className="content">
       <div className="cart-table-wrapper">
@@ -207,7 +237,7 @@ const ContentCheckout = () => {
           {promoMessage}
         </div>
         <div className="text-wrapper-14">Total Cart Value: ₹{newTotal}</div>
-        <button className="button">
+        <button className="button" onClick={handleProceedToPayment}>
           <div className="text-wrapper-15">PROCEED TO PAYMENT</div>
         </button>
       </div>

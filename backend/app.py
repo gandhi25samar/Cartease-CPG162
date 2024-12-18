@@ -438,7 +438,125 @@
 
 
 
-#Logic 5
+# #Logic 5
+# from flask import Flask, request, jsonify
+# from flask_cors import CORS
+# import cv2
+# import numpy as np
+# from ultralytics import YOLOv10
+# import supervision as sv
+# import os
+# import base64
+
+# # Initialize Flask app
+# app = Flask(__name__)
+# CORS(app)
+
+# # Load models
+# presence_model = YOLOv10("src/smodel_64eopch_32batch_1095.pt")
+# recog_model = YOLOv10("src/smodel_64epoch_32batch_1116img_recog.pt")
+# virtual_cart = {}
+# no_cart_frames = 0  # Counter for frames without a "cart"
+# ALERT_THRESHOLD = 2  # 2 seconds worth of frames
+# camera = False
+# @app.route("/process-image", methods=["POST"])
+# def process_image():
+#     global no_cart_frames, virtual_cart, camera
+#     # Reset the virtual cart for each request
+#     virtual_cart = {}
+
+#     # Parse the incoming request data
+#     data = request.json
+#     if "image" not in data:
+#         return jsonify({"error": "No image data provided"}), 400
+
+#     # Decode the base64 image data
+#     image_data = base64.b64decode(data["image"])
+#     nparr = np.frombuffer(image_data, np.uint8)
+#     frame = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
+#     # if frame is None:
+#     #     return jsonify({"error": "Failed to decode image data"}), 400
+
+#     # Run the presence detection model
+#     presence_results = presence_model(frame)[0]
+#     presence_detections = sv.Detections.from_ultralytics(presence_results)
+
+#     # Annotate the frame with presence model detections
+#     # presence_annotator = sv.BoxAnnotator()
+#     # label_annotator = sv.LabelAnnotator()
+#     # presence_annotated_frame = presence_annotator.annotate(frame.copy(), presence_detections)
+#     # presence_annotated_frame = label_annotator.annotate(
+#     #     scene=presence_annotated_frame, detections=presence_detections
+#     # )
+
+#     # Process detected objects: Only process the largest bounding box
+#     items_detected = []
+#     bbox_array = presence_detections.xyxy
+#     class_name_array = presence_detections.data.get("class_name", [])
+#     cart_detected = "cart" in class_name_array
+
+#     if cart_detected:
+#         no_cart_frames = 0
+#         camera = False
+#     else:
+#         no_cart_frames+= 1
+#         if no_cart_frames > ALERT_THRESHOLD:
+#             camera = True
+#     if len(bbox_array) > 0:
+#         areas = [(bbox[2] - bbox[0]) * (bbox[3] - bbox[1]) for bbox in bbox_array]
+#         largest_idx = np.argmax(areas)
+#         largest_bbox = bbox_array[largest_idx]
+#         x_min, y_min, x_max, y_max = map(int, largest_bbox)
+
+#         class_name = presence_detections.data.get("class_name", [])[largest_idx] \
+#             if largest_idx < len(presence_detections.data.get("class_name", [])) else "unknown"
+
+#         cropped_frame = frame[y_min:y_max, x_min:x_max]
+#         #cropped_frame = frame[max(0, y_min):max(0, y_max - 25), max(0, x_min + 225):max(0, x_max - 225)]
+#         # Run the recognition model on the cropped frame
+#         item_results = recog_model(cropped_frame)[0]
+#         item_detections = sv.Detections.from_ultralytics(item_results)
+
+#         # Annotate the cropped frame with recognition model detections
+#         # recog_annotator = sv.BoxAnnotator()
+#         # recog_annotated_frame = recog_annotator.annotate(
+#         #     cropped_frame.copy(), item_detections
+#         # )
+#         # recog_annotated_frame = label_annotator.annotate(
+#         #     scene=recog_annotated_frame, detections=item_detections
+#         # )
+
+#         for item_idx, item_bbox in enumerate(item_detections.xyxy):
+#             item_name = item_detections.data.get("class_name", ["unknown"])[item_idx]
+#             if item_name == "lays_green_20":
+#                 item_name = "Lays American Style Cream & Onion - 20"
+#             elif item_name == "lays_green_50":
+#                 item_name = "Lays American Style Cream & Onion - 50"
+
+#             # Update the virtual cart
+#             virtual_cart[item_name] = virtual_cart.get(item_name, 0) + 1
+
+#             # Log the detection
+#             items_detected.append({
+#                 "name": item_name,
+#                 "action": class_name,
+#                 # "confidence": float(presence_detections.confidence[largest_idx])
+#             })
+
+#     # # Save the annotated frame
+#     # output_path = os.path.join(output_folder, "annotated_image.jpg")
+#     # cv2.imwrite(output_path, presence_annotated_frame)
+#     # virtual_cart = {"Nabati Cheese Wafers" : 90}
+#     # Return the response
+#     return jsonify({
+#         "cart": virtual_cart,
+#         "detections": items_detected,
+#         "camera_blocked": camera
+#     })
+
+# if __name__ == "__main__":
+#     app.run(host="0.0.0.0", port=5000, debug=True)
+
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 import cv2
@@ -447,6 +565,7 @@ from ultralytics import YOLOv10
 import supervision as sv
 import os
 import base64
+import pandas as pd
 
 # Initialize Flask app
 app = Flask(__name__)
@@ -455,10 +574,17 @@ CORS(app)
 # Load models
 presence_model = YOLOv10("src/smodel_64eopch_32batch_1095.pt")
 recog_model = YOLOv10("src/smodel_64epoch_32batch_1116img_recog.pt")
+
+# Global Variables
 virtual_cart = {}
 no_cart_frames = 0  # Counter for frames without a "cart"
 ALERT_THRESHOLD = 2  # 2 seconds worth of frames
 camera = False
+
+# Path to cumulative sales data
+SALES_FILE = "sales_data.csv"
+
+
 @app.route("/process-image", methods=["POST"])
 def process_image():
     global no_cart_frames, virtual_cart, camera
@@ -474,20 +600,10 @@ def process_image():
     image_data = base64.b64decode(data["image"])
     nparr = np.frombuffer(image_data, np.uint8)
     frame = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
-    # if frame is None:
-    #     return jsonify({"error": "Failed to decode image data"}), 400
 
     # Run the presence detection model
     presence_results = presence_model(frame)[0]
     presence_detections = sv.Detections.from_ultralytics(presence_results)
-
-    # Annotate the frame with presence model detections
-    # presence_annotator = sv.BoxAnnotator()
-    # label_annotator = sv.LabelAnnotator()
-    # presence_annotated_frame = presence_annotator.annotate(frame.copy(), presence_detections)
-    # presence_annotated_frame = label_annotator.annotate(
-    #     scene=presence_annotated_frame, detections=presence_detections
-    # )
 
     # Process detected objects: Only process the largest bounding box
     items_detected = []
@@ -499,9 +615,10 @@ def process_image():
         no_cart_frames = 0
         camera = False
     else:
-        no_cart_frames+= 1
+        no_cart_frames += 1
         if no_cart_frames > ALERT_THRESHOLD:
             camera = True
+
     if len(bbox_array) > 0:
         areas = [(bbox[2] - bbox[0]) * (bbox[3] - bbox[1]) for bbox in bbox_array]
         largest_idx = np.argmax(areas)
@@ -512,19 +629,10 @@ def process_image():
             if largest_idx < len(presence_detections.data.get("class_name", [])) else "unknown"
 
         cropped_frame = frame[y_min:y_max, x_min:x_max]
-        #cropped_frame = frame[max(0, y_min):max(0, y_max - 25), max(0, x_min + 225):max(0, x_max - 225)]
+
         # Run the recognition model on the cropped frame
         item_results = recog_model(cropped_frame)[0]
         item_detections = sv.Detections.from_ultralytics(item_results)
-
-        # Annotate the cropped frame with recognition model detections
-        # recog_annotator = sv.BoxAnnotator()
-        # recog_annotated_frame = recog_annotator.annotate(
-        #     cropped_frame.copy(), item_detections
-        # )
-        # recog_annotated_frame = label_annotator.annotate(
-        #     scene=recog_annotated_frame, detections=item_detections
-        # )
 
         for item_idx, item_bbox in enumerate(item_detections.xyxy):
             item_name = item_detections.data.get("class_name", ["unknown"])[item_idx]
@@ -540,23 +648,106 @@ def process_image():
             items_detected.append({
                 "name": item_name,
                 "action": class_name,
-                # "confidence": float(presence_detections.confidence[largest_idx])
+                "confidence": float(presence_detections.confidence[largest_idx])
             })
-
-    # # Save the annotated frame
-    # output_path = os.path.join(output_folder, "annotated_image.jpg")
-    # cv2.imwrite(output_path, presence_annotated_frame)
-    # virtual_cart = {"Nabati Cheese Wafers" : 90}
+    virtual_cart = {"Nabati Cheese Wafers" : 20, "Lays American Style Cream & Onion - 50": 50}
     # Return the response
+    # global global_cart
+    # global_cart = virtual_cart
     return jsonify({
         "cart": virtual_cart,
         "detections": items_detected,
-        "camera_blocked": camera
+        "camera_blocked": False #camera
     })
+
+@app.route("/finalize-cart", methods=["POST"])
+def finalize_cart():
+    import csv
+    from datetime import datetime
+
+    global virtual_cart
+
+    # Ensure the virtual cart is not empty
+    if not virtual_cart:
+        return jsonify({"error": "Virtual cart is empty"}), 400
+
+    # Load prices for items
+    prices = {
+        "Lays American Style Cream & Onion - 20": 20,
+        "Lays American Style Cream & Onion - 50": 50,
+        "Nabati Cheese Wafers":20
+        # Add more items and prices here
+    }
+
+    # Calculate the total sale and prepare the data
+    order_id = int(datetime.now().timestamp())  # Unique Order ID based on timestamp
+    order_data = []
+    total_sale = 0
+
+    for item, quantity in virtual_cart.items():
+        price = prices.get(item, 0)
+        item_total = price * quantity
+        total_sale += item_total
+        order_data.append({
+            "Order_ID": order_id,
+            "Item": item,
+            "Quantity": quantity,
+            "Price_Per_Unit": price,
+            "Total_Sale": item_total,
+        })
+
+    # Save data to CSV
+    file_exists = os.path.isfile("sales_data.csv")
+    with open("sales_data.csv", mode="a", newline="") as file:
+        fieldnames = ["Order_ID", "Item", "Quantity", "Price_Per_Unit", "Total_Sale"]
+        writer = csv.DictWriter(file, fieldnames=fieldnames)
+
+        # Write the header only if the file doesn't exist
+        if not file_exists:
+            writer.writeheader()
+
+        # Write each row of the order data
+        writer.writerows(order_data)
+
+    # Clear the virtual cart after finalizing
+    virtual_cart = {}
+
+    return jsonify({
+        "message": "Order finalized and saved",
+        "Order_ID": order_id,
+        "Total_Sale": total_sale,
+        "Order_Details": order_data,
+    })
+
+
+@app.route("/sales-insights", methods=["GET"])
+def sales_insights():
+    if not os.path.exists(SALES_FILE):
+        return jsonify({"error": "No sales data available"}), 400
+
+    sales_data = pd.read_csv(SALES_FILE)
+
+    # Total Sales
+    total_sales = sales_data["Total_Sale"].sum()
+
+    # Most and Least Selling Product
+    product_sales = sales_data.groupby("Item")["Quantity"].sum()
+    most_selling_product = product_sales.idxmax()
+    least_selling_product = product_sales.idxmin()
+
+    # Average Order Value
+    total_orders = len(sales_data["Total_Sale"])
+    average_order_value = total_sales / total_orders if total_orders > 0 else 0
+    return jsonify({
+        "total_sales": total_sales,
+        "most_selling_product": most_selling_product,
+        "least_selling_product": least_selling_product,
+        "average_order_value": average_order_value
+    })
+
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000, debug=True)
-
 
 
 
