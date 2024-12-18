@@ -211,7 +211,7 @@ const Content = () => {
       const blynkWeight = parseFloat(await response.json());
       const weightDifference = Math.abs(totalWeight - blynkWeight);
 
-      if (weightDifference > 10000000) {
+      if (weightDifference > 20) {
         alert(
           `Weight mismatch! Calculated: ${totalWeight}, Measured: ${blynkWeight}. Difference: ${weightDifference}`
         );
