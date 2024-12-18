@@ -650,14 +650,14 @@ def process_image():
                 "action": class_name,
                 "confidence": float(presence_detections.confidence[largest_idx])
             })
-    virtual_cart = {"Nabati Cheese Wafers" : 20, "Lays American Style Cream & Onion - 50": 50}
+    # virtual_cart = {"Nabati Cheese Wafers" : 20, "Lays American Style Cream & Onion - 50": 50}
     # Return the response
     # global global_cart
     # global_cart = virtual_cart
     return jsonify({
         "cart": virtual_cart,
         "detections": items_detected,
-        "camera_blocked": False
+        "camera_blocked": camera
     })
 
 @app.route("/finalize-cart", methods=["POST"])
