@@ -18,7 +18,7 @@ const CameraFeed = ({ cameraState }) => {
 
         try {
           const response = await fetch(
-            "http://172.16.38.39:5000/process-image",
+            "http://172.20.10.10:5000/process-image",
             {
               method: "POST",
               headers: {

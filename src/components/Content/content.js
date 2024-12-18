@@ -143,7 +143,7 @@
 
 import React, { useState, useEffect, useContext } from "react";
 import fetchCartItems from "./cart_items";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import inventory from "../Products/inventory";
 import { CartContext } from "../CartContext";
 import "./content.css";
@@ -152,6 +152,11 @@ const Content = () => {
   const [cartItems, setCartItems] = useState([]);
   // const [loading, setLoading] = useState(true);
   const { cart } = useContext(CartContext);
+  const navigate = useNavigate(); // To programmatically navigate
+
+  const BLYNK_API_URL = "https://blynk.cloud/external/api/get";
+  const BLYNK_TOKEN = "BGSudAO4EWXMVv9LgIV-uGYhMv7x5M8p";
+  const DATA_PIN = "v1"; // Replace with the actual pin from Blynk
 
   // useEffect(() => {
   //   const fetchData = async () => {
@@ -178,6 +183,7 @@ const Content = () => {
     return {
       ...cartItem,
       price: inventoryItem?.price || 0, // Default to 0 if not found
+      weight: inventoryItem?.weight || 0,
       image: inventoryItem?.image || "default.jpg", // Fallback image
     };
   });
@@ -186,6 +192,37 @@ const Content = () => {
     (total, item) => total + item.price * item.qty,
     0
   );
+  const totalWeight = updatedCartItems.reduce(
+    (total, item) => total + item.weight * item.qty,
+    0
+  );
+
+  const handleCheckout = async () => {
+    try {
+      // Fetch weight from Blynk API
+      const response = await fetch(
+        `${BLYNK_API_URL}?token=${BLYNK_TOKEN}&${DATA_PIN}`
+      );
+      if (!response.ok) {
+        alert("Failed to fetch weight from Blynk API");
+        return;
+      }
+
+      const blynkWeight = parseFloat(await response.json());
+      const weightDifference = Math.abs(totalWeight - blynkWeight);
+
+      if (weightDifference > 10000000) {
+        alert(
+          `Weight mismatch! Calculated: ${totalWeight}, Measured: ${blynkWeight}. Difference: ${weightDifference}`
+        );
+      } else {
+        navigate("/Checkout"); // Allow routing
+      }
+    } catch (error) {
+      console.error("Error while fetching weight:", error);
+      alert("An error occurred while verifying the weight.");
+    }
+  };
 
   return (
     <div className="content">
@@ -222,14 +259,14 @@ const Content = () => {
 
       <div className="total-checkout">
         <div className="total-cart-value">Total Cart Value: ₹{totalPrice}</div>
-        <button className="button">
-          <Link
+        <button className="button" onClick={handleCheckout}>
+          {/* <Link
             to="/Checkout"
             className="checkout-link"
             style={{ textDecoration: "none" }}
-          >
-            PROCEED TO CHECKOUT
-          </Link>
+          > */}
+          PROCEED TO CHECKOUT
+          {/* </Link> */}
         </button>
       </div>
     </div>
