@@ -17,16 +17,13 @@ const CameraFeed = ({ cameraState }) => {
         const base64Image = imageSrc.split(",")[1]; // Extract base64 string
 
         try {
-          const response = await fetch(
-            "http://172.20.10.10:5000/process-image",
-            {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify({ image: base64Image }),
-            }
-          );
+          const response = await fetch("http://127.0.0.1:4040/process-image", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ image: base64Image }),
+          });
 
           const data = await response.json();
           console.log("Cart Contents:", data.cart); // Update your UI with cart data
