@@ -166,7 +166,7 @@ const Checkout = () => {
 `;
 
     try {
-      const response = await fetch("http://172.16.38.39:3001/send-email", {
+      const response = await fetch("https://localhost:3001/send-email", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
