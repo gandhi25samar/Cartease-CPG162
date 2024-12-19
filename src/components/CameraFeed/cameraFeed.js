@@ -18,7 +18,7 @@ const CameraFeed = ({ cameraState }) => {
 
         try {
           const response = await fetch(
-            "https://3be4-112-196-126-3.ngrok-free.app/process-image",
+            "https://c38a-117-203-246-41.ngrok-free.app/process-image",
             {
               method: "POST",
               headers: {
