@@ -166,7 +166,7 @@ const Checkout = () => {
 `;
 
     try {
-      const response = await fetch("https://fb18-112-196-126-3.ngrok-free.app/send-email", {
+      const response = await fetch("http://localhost:3001/send-email", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

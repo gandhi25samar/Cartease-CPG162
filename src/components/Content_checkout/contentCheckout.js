@@ -151,16 +151,13 @@ const ContentCheckout = () => {
     };
 
     try {
-      const response = await fetch(
-        "https://c38a-117-203-246-41.ngrok-free.app/finalize-cart",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(requestBody),
-        }
-      );
+      const response = await fetch("http://localhost:5000/finalize-cart", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(requestBody),
+      });
 
       if (!response.ok) {
         throw new Error("Failed to finalize the cart. Please try again.");

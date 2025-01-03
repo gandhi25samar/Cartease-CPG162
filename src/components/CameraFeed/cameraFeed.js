@@ -17,16 +17,13 @@ const CameraFeed = ({ cameraState }) => {
         const base64Image = imageSrc.split(",")[1]; // Extract base64 string
 
         try {
-          const response = await fetch(
-            "https://c38a-117-203-246-41.ngrok-free.app/process-image",
-            {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify({ image: base64Image }),
-            }
-          );
+          const response = await fetch("http://localhost:5000/process-image", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ image: base64Image }),
+          });
 
           const data = await response.json();
           console.log("Cart Contents:", data.cart); // Update your UI with cart data
